@@ -65,7 +65,7 @@ export default async function Product({
   }
 
   return (
-    <div className="mt-4">
+    <div className="">
       <Breadcrumbs
         title="Products"
         items={[
