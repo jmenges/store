@@ -1,9 +1,16 @@
-'use client';
+"use client";
 
-import { defaultSortOption, sortOptions } from '@/lib/constants';
-import { SortOptionValue } from '@/types';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Dispatch, useCallback, useEffect, useMemo, useState } from 'react';
+import { defaultSortOption, sortOptions } from "@/lib/constants";
+import { SortOptionValue } from "@/types";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  Dispatch,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 export type Sorter = {
   activeOption: SortOptionValue;
@@ -11,8 +18,12 @@ export type Sorter = {
 };
 
 export default function useProductSorter(): Sorter {
+  const isMountedRef = useRef<boolean>(false);
+
   /* State */
-  const [activeOption, setActiveOption] = useState<SortOptionValue | null>(null);
+  const [activeOption, setActiveOption] = useState<SortOptionValue | null>(
+    null
+  );
 
   /**
    * Hooks
@@ -22,10 +33,33 @@ export default function useProductSorter(): Sorter {
   const searchParams = useSearchParams();
 
   /* Calculatations */
-  const queryParamSort = useMemo(() => searchParams.get('sort'), [searchParams]);
+  const queryParamSort = useMemo(
+    () => searchParams.get("sort"),
+    [searchParams]
+  );
+
+  /**
+   * Functions
+   */
+  const setSortQueryString = useCallback(
+    (value?: string) => {
+      const params = new URLSearchParams(Array.from(searchParams.entries()));
+      if (value) {
+        params.set("sort", value);
+      } else {
+        params.delete("sort");
+      }
+      router.push(pathname + "?" + params.toString(), { scroll: false });
+    },
+    [searchParams, pathname, router]
+  );
 
   /* Set the local state based on the query parameter on initial render */
   useEffect(() => {
+    // only run once
+    if (isMountedRef.current === true) return;
+    isMountedRef.current = true;
+
     if (queryParamSort !== null) {
       const validOption = sortOptions.find(
         (option) => option.urlValue === queryParamSort.toLowerCase()
@@ -40,14 +74,14 @@ export default function useProductSorter(): Sorter {
     } else {
       setActiveOption(defaultSortOption.urlValue);
     }
-  }, []);
+  }, [queryParamSort, setSortQueryString]);
 
   /* Set query parameter based on active category */
   useEffect(() => {
     /* Guard clauses */
     if (
       activeOption === null ||
-      (!queryParamSort && activeOption === 'upvotes-desc') ||
+      (!queryParamSort && activeOption === "upvotes-desc") ||
       queryParamSort === activeOption
     )
       return;
@@ -55,23 +89,7 @@ export default function useProductSorter(): Sorter {
     /* Set query parameter based on active category */
     const nextOption = activeOption;
     setSortQueryString(nextOption);
-  }, [activeOption, pathname, queryParamSort]);
-
-  /**
-   * Functions
-   */
-  const setSortQueryString = useCallback(
-    (value?: string) => {
-      const params = new URLSearchParams(Array.from(searchParams.entries()));
-      if (value) {
-        params.set('sort', value);
-      } else {
-        params.delete('sort');
-      }
-      router.push(pathname + '?' + params.toString(), { scroll: false });
-    },
-    [searchParams, pathname]
-  );
+  }, [activeOption, pathname, queryParamSort, setSortQueryString]);
 
   return {
     activeOption: activeOption || defaultSortOption.urlValue,
