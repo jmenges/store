@@ -9,7 +9,7 @@ import { Collection } from "@/types/shopify";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-type Props = {
+export type ProductFilterProps = {
   currencySymbol: string;
   productTypes: string[];
   activeFilters: [string, string | string[] | undefined][];
@@ -23,7 +23,7 @@ export default function ProductFilter({
   collections,
   activeFilters,
   className,
-}: Props) {
+}: ProductFilterProps) {
   /* Hooks */
   const searchParams = useSearchParams().toString();
 
