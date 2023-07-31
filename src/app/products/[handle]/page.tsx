@@ -15,7 +15,7 @@ import { ProductVariant } from "@/types/shopify";
 import {
   getProduct,
   getProductRecommendations,
-} from "@/lib/shopify/operations";
+} from "@/lib/shopify/operations/product";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 type ValidSearchParams = {

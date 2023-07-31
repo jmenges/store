@@ -1,6 +1,5 @@
 import { TAGS } from "@/lib/constants";
 import { shopifyFetch } from "@/lib/shopify/api";
-import { getCollectionsQuery } from "@/lib/shopify/queries/collection";
 import {
   getProductNodesQuery,
   getProductQuery,
@@ -8,24 +7,17 @@ import {
   getProductTypesQuery,
   getProductsQuery,
 } from "@/lib/shopify/queries/product";
-import { getShopCurrencyQuery } from "@/lib/shopify/queries/shop";
-import { getCurrencySymbolFromCode } from "@/lib/shopify/utils";
+import { removeEdgesAndNodes } from "@/lib/shopify/utils";
 import {
-  GetCollectionsOperation,
   GetProductNodesOperation,
   GetProductOperation,
   GetProductRecommendationsOperation,
   GetProductTypesOperation,
-  GetProductsOperation,
-  GetShopCurrencyOperation,
+  GetProductsOperation
 } from "@/types/operations";
 import {
-  Collection,
-  Connection,
   Product,
-  ShopCurrency,
-  ShopifyCollection,
-  ShopifyProduct,
+  ShopifyProduct
 } from "@/types/shopify";
 
 const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
@@ -34,9 +26,6 @@ const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
  * Shared functions
  */
 
-const removeEdgesAndNodes = (array: Connection<any>) => {
-  return array.edges.map((edge) => edge?.node);
-};
 
 const reshapeProduct = (
   product: ShopifyProduct,
@@ -74,35 +63,6 @@ const reshapeProducts = (products: ShopifyProduct[]) => {
   return reshapedProducts;
 };
 
-const reshapeCollections = (collections: ShopifyCollection[]) => {
-  const reshapedCollections = [];
-  for (const collection of collections) {
-    if (collection) {
-      const reshapedCollection = reshapeCollection(collection);
-
-      if (reshapedCollection) {
-        reshapedCollections.push(reshapedCollection);
-      }
-    }
-  }
-
-  return reshapedCollections;
-};
-
-const reshapeCollection = (collection: ShopifyCollection) => {
-  const { products, ...rest } = collection;
-
-  return {
-    ...rest,
-    productCount: products.edges.length,
-  };
-};
-
-/* Operations */
-
-/*
- * Related to Products
- */
 export async function getProducts({
   query,
   reverse,
@@ -169,28 +129,3 @@ export async function getProductTypes(): Promise<string[]> {
   return removeEdgesAndNodes(res.body.data.productTypes);
 }
 
-/**
- * Related to shop
- */
-export async function getShopCurrency(): Promise<ShopCurrency> {
-  const res = await shopifyFetch<GetShopCurrencyOperation>({
-    query: getShopCurrencyQuery,
-  });
-  const currencyCode = res.body.data.shop.paymentSettings.currencyCode;
-
-  return {
-    currencyCode,
-    symbol: getCurrencySymbolFromCode(currencyCode),
-  };
-}
-
-/**
- * Related to Collections
- */
-export async function getCollections(): Promise<Collection[]> {
-  const res = await shopifyFetch<GetCollectionsOperation>({
-    query: getCollectionsQuery,
-    tags: [TAGS.collections],
-  });
-  return reshapeCollections(removeEdgesAndNodes(res.body?.data?.collections));
-}

@@ -6,13 +6,13 @@ import ProductGrid from "@/components/ProductGrid/ProductGrid";
 import ProductSorter from "@/components/ProductGrid/ProductSorter";
 import { filterQueryKeys, sortOptions } from "@/lib/constants";
 import { buildQueryFromQueryParms } from "@/lib/filter";
+import { getCollections } from "@/lib/shopify/operations/collection";
 import {
-  getCollections,
   getProductCount,
   getProductTypes,
   getProducts,
-  getShopCurrency,
-} from "@/lib/shopify/operations";
+} from "@/lib/shopify/operations/product";
+import { getShopCurrency } from "@/lib/shopify/operations/shop";
 import { SearchParams } from "@/types";
 
 export default async function Products({
@@ -62,7 +62,7 @@ export default async function Products({
           { title: "Shop", href: "/products" },
         ]}
       />
-      
+
       {/* Content */}
       <main className="container relative mx-auto mb-12 flex">
         <ProductFilter

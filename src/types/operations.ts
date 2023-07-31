@@ -1,4 +1,4 @@
-import { Connection, ShopifyCollection, ShopifyProduct } from "@/types/shopify";
+import { Connection, ShopifyCart, ShopifyCollection, ShopifyProduct } from "@/types/shopify";
 import { CurrencyCode } from "@shopify/hydrogen-react/storefront-api-types";
 
 /* Products */
@@ -55,5 +55,62 @@ export type GetShopCurrencyOperation = {
 export type GetCollectionsOperation = {
   data: {
     collections: Connection<ShopifyCollection>;
+  };
+};
+
+/* Cart */
+export type GetCartOperation = {
+  data: {
+    cart: ShopifyCart;
+  };
+  variables: {
+    cartId: string;
+  };
+};
+
+export type CreateCartOperation = {
+  data: { cartCreate: { cart: ShopifyCart } };
+};
+
+export type AddToCartOperation = {
+  data: {
+    cartLinesAdd: {
+      cart: ShopifyCart;
+    };
+  };
+  variables: {
+    cartId: string;
+    lines: {
+      merchandiseId: string;
+      quantity: number;
+    }[];
+  };
+};
+
+export type RemoveFromCartOperation = {
+  data: {
+    cartLinesRemove: {
+      cart: ShopifyCart;
+    };
+  };
+  variables: {
+    cartId: string;
+    lineIds: string[];
+  };
+};
+
+export type UpdateCartOperation = {
+  data: {
+    cartLinesUpdate: {
+      cart: ShopifyCart;
+    };
+  };
+  variables: {
+    cartId: string;
+    lines: {
+      id: string;
+      merchandiseId: string;
+      quantity: number;
+    }[];
   };
 };

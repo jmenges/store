@@ -62,6 +62,7 @@ export const filterQueryKeys = filters.map((filter) => filter.urlKey);
 export const TAGS = {
   collections: "collections",
   products: "products",
+  cart: "cart"
 };
 
 /* Footer Nav */

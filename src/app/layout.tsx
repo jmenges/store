@@ -3,6 +3,7 @@ import { Noto_Sans_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header/Header";
+import CartProvider from "@/components/context/cart-context";
 
 const notoMono = Noto_Sans_Mono({
   subsets: ["latin"],
@@ -30,9 +31,11 @@ export default function RootLayout({ children }: LayoutProps) {
       <body
         className={`${notoMono.variable} ${roboto.variable} bg-white font-sans text-black antialiased`}
       >
-        <Header />
-        <div className="min-h-screen">{children}</div>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <div className="min-h-screen">{children}</div>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
