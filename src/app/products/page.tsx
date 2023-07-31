@@ -1,3 +1,4 @@
+import ActiveFilterChips from "@/components/ProductGrid/ActiveFilterChips";
 import ProductFilter from "@/components/ProductGrid/ProductFilter";
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
 import ProductSorter from "@/components/ProductGrid/ProductSorter";
@@ -62,17 +63,20 @@ export default async function Products({
           className="sticky top-0 mr-8 h-fit w-1/4 pt-4"
         />
         <div className="w-3/4 flex-1">
-          <div className="text-sm">
-            <div className="flex w-full items-center">
-              <p>
-                Showing <span className="font-medium">{products.length}</span>{" "}
-                results from a total of
-                <span className="font-medium">{productCounts}</span>.
-              </p>
-              <ProductSorter className="ml-auto min-w-[200px] flex-shrink-0" />
-            </div>
-            <ProductGrid className="pt-4" products={products} />;
+          <div className="flex w-full items-center">
+            <p>
+              Showing <span className="font-medium">{products.length}</span>{" "}
+              results from a total of
+              <span className="font-medium">{productCounts}</span>.
+            </p>
+            <ProductSorter className="ml-auto min-w-[200px] flex-shrink-0" />
           </div>
+          <ActiveFilterChips
+            currencySymbol={shopCurrency.symbol}
+            className="pt-2"
+            activeFilters={activeFilters}
+          />
+          <ProductGrid className="pt-4" products={products} />;
         </div>
       </main>
     </div>
