@@ -1,7 +1,7 @@
 import ProductFilter from "@/components/ProductGrid/ProductFilter";
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
 import ProductSorter from "@/components/ProductGrid/ProductSorter";
-import { filterQueryKeys } from "@/lib/constants";
+import { filterQueryKeys, sortOptions } from "@/lib/constants";
 import { buildQueryFromQueryParms } from "@/lib/filter";
 import {
   getCollections,
@@ -17,6 +17,11 @@ export default async function Products({
 }: {
   searchParams: SearchParams;
 }) {
+  const queryParamSort = searchParams["sort"];
+  const validSortOption = sortOptions.find(
+    (option) => option.urlValue === queryParamSort
+  );
+
   // object entries is in the format [key, value | values][]
   const activeFilters = Object.entries(searchParams).filter((param) =>
     filterQueryKeys.includes(param[0])
@@ -26,6 +31,8 @@ export default async function Products({
 
   const productsData = getProducts({
     query,
+    sortKey: validSortOption?.sortKey,
+    reverse: validSortOption?.reverse,
   });
 
   const productCountsData = getProductCount();
