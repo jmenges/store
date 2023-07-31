@@ -1,7 +1,13 @@
 import { TAGS } from "@/lib/constants";
 import { shopifyFetch } from "@/lib/shopify/api";
-import { getProductsQuery } from "@/lib/shopify/queries/product";
-import { GetProductsOperation } from "@/types/operations";
+import {
+  getProductNodesQuery,
+  getProductsQuery,
+} from "@/lib/shopify/queries/product";
+import {
+  GetProductNodesOperation,
+  GetProductsOperation,
+} from "@/types/operations";
 import { Connection, Product, ShopifyProduct } from "@/types/shopify";
 
 const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
@@ -71,4 +77,14 @@ export async function getProducts({
   });
 
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+}
+
+export async function getProductCount() {
+  const res = await shopifyFetch<GetProductNodesOperation>({
+    query: getProductNodesQuery,
+    tags: [TAGS.products],
+  });
+
+  const count = res.body.data.products.edges.length;
+  return count || 0;
 }

@@ -10,3 +10,9 @@ export type GetProductsOperation = {
     sortKey?: string;
   };
 };
+
+export type GetProductNodesOperation = {
+  data: {
+    products: Connection<{ id: string }>;
+  };
+};

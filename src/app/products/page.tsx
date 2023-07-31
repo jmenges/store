@@ -1,8 +1,14 @@
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
-import { getProducts } from "@/lib/shopify/operations";
+import { getProductCount, getProducts } from "@/lib/shopify/operations";
 
 export default async function Products() {
-  const products = await getProducts({});
+  const productsData = getProducts({});
+  const productCountsData = getProductCount();
+
+  const [products, productCounts] = await Promise.all([
+    productsData,
+    productCountsData,
+  ]);
 
   return (
     <div className="mt-4">
@@ -12,9 +18,7 @@ export default async function Products() {
           <div className="text-sm">
             <div className="flex w-full items-center">
               <p>
-                Showing <span className="font-medium">{products.length}</span>{" "}
-                results from a total of
-                <span className="font-medium"> 37</span>.
+                Showing <span className="font-medium">{products.length}</span> results from a total of <span className="font-medium">{productCounts}</span>.
               </p>
             </div>
             <ProductGrid className="pt-4" products={products} />;

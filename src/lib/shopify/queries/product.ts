@@ -9,6 +9,18 @@ export const getProductQuery = /* GraphQL */ `
   ${productFragment}
 `;
 
+export const getProductNodesQuery = /* GraphQL */ `
+  query getProductsNodes {
+    products(first: 250) {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }
+`;
+
 export const getProductsQuery = /* GraphQL */ `
   query getProducts(
     $sortKey: ProductSortKeys
