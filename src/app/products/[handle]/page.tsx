@@ -16,6 +16,7 @@ import {
   getProduct,
   getProductRecommendations,
 } from "@/lib/shopify/operations";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 type ValidSearchParams = {
   [key: string]: string;
@@ -65,6 +66,18 @@ export default async function Product({
 
   return (
     <div className="mt-4">
+      <Breadcrumbs
+        title="Products"
+        items={[
+          { title: "Home", href: "/" },
+          { title: "Shop", href: "/products" },
+          {
+            title: product.productType,
+            href: `/products/?category=${product.productType}`,
+          },
+        ]}
+      />
+
       <main className="container mx-auto mb-12">
         <div className="flex flex-col md:flex-row md:items-start gap-4">
           <ProductImages className="md:w-3/5" images={product.images} />
