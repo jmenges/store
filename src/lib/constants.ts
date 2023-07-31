@@ -8,6 +8,13 @@ type NavItem = {
   href: string;
 };
 
+/* Tags */
+export const TAGS = {
+  collections: "collections",
+  products: "products",
+};
+
+/* Footer Nav */
 export const footerNav: Menu[] = [
   {
     title: "Company",
