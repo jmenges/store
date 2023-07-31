@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ["localhost", "cdn.shopify.com"],
+  },
   reactStrictMode: true,
   webpack(config) {
     config.plugins.push(
