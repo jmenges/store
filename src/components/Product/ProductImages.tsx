@@ -30,30 +30,8 @@ function ProductImages({ images, className }: Props) {
   };
 
   return (
-    <div className={cn("relative flex", className)}>
-      <DraggableScrollSection className="absolute left-0 flex max-h-full w-1/4 flex-col gap-2 px-4">
-        {images.map((image, index) => (
-          <button
-            className={cn(
-              "flex flex-shrink-0 transition-all",
-              index === activeIndex ? "border-2 border-gray-300" : ""
-            )}
-            key={image.url}
-            onClick={() => setActiveIndex(index)}
-          >
-            {image.width && image.height ? (
-              <Image
-                src={image.url}
-                width={image.width}
-                height={image.height}
-                alt={image.altText || ""}
-                className="object-contain"
-              />
-            ) : null}
-          </button>
-        ))}
-      </DraggableScrollSection>
-      <div className="relative ml-[25%] w-3/4">
+    <div className={cn("relative", className)}>
+      <div className="relative sm:ml-[25%] sm:w-3/4">
         {activeImageRef.current.width && activeImageRef.current.height ? (
           <Image
             src={images[activeIndex].url}
@@ -84,6 +62,28 @@ function ProductImages({ images, className }: Props) {
           </HeroIcon>
         </Button>
       </div>
+      <DraggableScrollSection className="sm:absolute top-0 left-0 flex sm:max-h-full sm:w-1/4 sm:flex-col gap-2 max-sm:py-2 sm:px-4">
+        {images.map((image, index) => (
+          <button
+            className={cn(
+              "flex flex-shrink-0 transition-all max-sm:w-1/4",
+              index === activeIndex ? "border-2 border-gray-300" : ""
+            )}
+            key={image.url}
+            onClick={() => setActiveIndex(index)}
+          >
+            {image.width && image.height ? (
+              <Image
+                src={image.url}
+                width={image.width}
+                height={image.height}
+                alt={image.altText || ""}
+                className="object-contain"
+              />
+            ) : null}
+          </button>
+        ))}
+      </DraggableScrollSection>
     </div>
   );
 }

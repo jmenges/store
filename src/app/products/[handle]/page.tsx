@@ -66,9 +66,9 @@ export default async function Product({
   return (
     <div className="mt-4">
       <main className="container mx-auto mb-12">
-        <div className="grid grid-cols-9 gap-4">
-          <ProductImages className="col-span-5" images={product.images} />
-          <div className="col-span-4 p-4">
+        <div className="flex flex-col md:flex-row md:items-start gap-4">
+          <ProductImages className="md:w-3/5" images={product.images} />
+          <div className="md:w-2/5 p-4">
             <h1 className="mb-2 text-3xl font-bold">{product.title}</h1>
             <ProductRating className="mb-2" rating={4} />
             <Price

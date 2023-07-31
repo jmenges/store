@@ -12,7 +12,7 @@ export default function DraggableScrollSection({ children, className }: Props) {
   const { events } = useDraggable(ref);
   return (
     <div
-      className={cn("relative overflow-y-hidden", className)}
+      className={cn("relative overflow-hidden", className)}
       {...events}
       ref={ref}
     >
