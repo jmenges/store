@@ -1,12 +1,17 @@
-'use client';
+"use client";
 
-import { Input } from '@/components/ui/input';
-import useQueryParamUpdater from '@/hooks/useQueryParamUpdater';
-import { getPriceRangeFromQuery, validatePriceRange } from '@/lib/filter';
-import { cn } from '@/lib/utils';
-import { useEffect, useRef, useState } from 'react';
+import { Input } from "@/components/ui/input";
+import useQueryParamUpdater from "@/hooks/useQueryParamUpdater";
+import { getPriceRangeFromQuery, validatePriceRange } from "@/lib/filter";
+import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
 
-type Props = { currencySymbol: string; urlKey: string; queryValues: string[]; className?: string };
+type Props = {
+  currencySymbol: string;
+  urlKey: string;
+  queryValues: string[];
+  className?: string;
+};
 
 export default function PriceRangeFilter({
   currencySymbol,
@@ -14,9 +19,10 @@ export default function PriceRangeFilter({
   urlKey,
   queryValues = [],
 }: Props) {
-  const [minPrice, setMinPrice] = useState<string>('');
-  const [maxPrice, setMaxPrice] = useState<string>('');
-  const [isPriceRangeInvalid, setIsPriceRangeInvalid] = useState<boolean>(false);
+  const [minPrice, setMinPrice] = useState<string>("");
+  const [maxPrice, setMaxPrice] = useState<string>("");
+  const [isPriceRangeInvalid, setIsPriceRangeInvalid] =
+    useState<boolean>(false);
 
   const minPriceRef = useRef<string>(minPrice);
   minPriceRef.current = minPrice;
@@ -29,10 +35,10 @@ export default function PriceRangeFilter({
   /* Update queryParams based on checkbox changes */
   useEffect(() => {
     const activeValues: string[] = [];
-    if (minPrice && minPrice !== '') {
+    if (minPrice && minPrice !== "") {
       activeValues.push(`>=${minPrice}`);
     }
-    if (maxPrice && maxPrice !== '') {
+    if (maxPrice && maxPrice !== "") {
       activeValues.push(`<=${maxPrice}`);
     }
 
@@ -40,7 +46,7 @@ export default function PriceRangeFilter({
     setIsPriceRangeInvalid(!isPriceRangeValid);
 
     if (isPriceRangeValid) setQueryParamArray(urlKey, activeValues);
-  }, [minPrice, maxPrice, urlKey]);
+  }, [minPrice, maxPrice, urlKey, setQueryParamArray ]);
 
   /* Handle filter updates based on external changes */
   useEffect(() => {
@@ -52,46 +58,52 @@ export default function PriceRangeFilter({
     }
 
     if (minPrice !== minPriceRef.current) {
-      setMinPrice(minPrice || '');
+      setMinPrice(minPrice || "");
     }
     if (maxPrice !== maxPriceRef.current) {
-      setMaxPrice(maxPrice || '');
+      setMaxPrice(maxPrice || "");
     }
-  }, [queryValues]);
+  }, [queryValues, removeFromQueryParams, urlKey]);
 
   return (
     <>
-      <div className={cn('flex gap-2', className)}>
+      <div className={cn("flex gap-2", className)}>
         <div
           className={cn(
             `relative flex after:absolute after:left-2 after:top-1/2 after:z-10 after:-translate-y-1/2 after:content-['${currencySymbol}']`,
-            isPriceRangeInvalid ? 'shake' : ''
+            isPriceRangeInvalid ? "shake" : ""
           )}
         >
           <Input
             onChange={(e) => {
-              const inputNumber = e.target.value.replace(/\D/g, '');
+              const inputNumber = e.target.value.replace(/\D/g, "");
               setMinPrice(inputNumber);
             }}
             type="text"
             value={minPrice}
-            className={cn('pl-5 text-gray-700', isPriceRangeInvalid ? 'border-red-500' : '')}
+            className={cn(
+              "pl-5 text-gray-700",
+              isPriceRangeInvalid ? "border-red-500" : ""
+            )}
             placeholder="Min Price"
           />
         </div>
         <div
           className={cn(
             `relative flex after:absolute after:left-2 after:top-1/2 after:z-10 after:-translate-y-1/2 after:content-['${currencySymbol}']`,
-            isPriceRangeInvalid ? 'shake' : ''
+            isPriceRangeInvalid ? "shake" : ""
           )}
         >
           <Input
             onChange={(e) => {
-              const inputNumber = e.target.value.replace(/\D/g, '');
+              const inputNumber = e.target.value.replace(/\D/g, "");
               setMaxPrice(inputNumber);
             }}
             type="text"
-            className={cn('pl-5 text-gray-700', isPriceRangeInvalid ? 'border-red-500 ' : '')}
+            className={cn(
+              "pl-5 text-gray-700",
+              isPriceRangeInvalid ? "border-red-500 " : ""
+            )}
             value={maxPrice}
             placeholder="Max Price"
           />

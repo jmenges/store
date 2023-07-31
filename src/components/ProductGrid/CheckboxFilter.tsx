@@ -30,7 +30,7 @@ export default function CheckboxFilter({
   /* Update queryParams based on checkbox changes */
   useEffect(() => {
     setQueryParamArray(urlKey, activeValues);
-  }, [activeValues, urlKey]);
+  }, [activeValues, urlKey, setQueryParamArray]);
 
   /* Handle filter updates based on external changes */
   useEffect(() => {

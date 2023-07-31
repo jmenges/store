@@ -21,7 +21,7 @@ export default function useQueryParamUpdater() {
 
       router.replace(pathname + "?" + params.toString(), { scroll: false });
     },
-    [searchParams, pathname]
+    [searchParams, pathname, router]
   );
 
   const setQueryParam = useCallback(
@@ -48,7 +48,7 @@ export default function useQueryParamUpdater() {
         router.replace(pathname + params, { scroll: false });
       }, 0);
     },
-    [searchParams, pathname]
+    [searchParams, pathname, router]
   );
 
   const removeFromQueryParams = (key: string) => {
@@ -65,7 +65,7 @@ export default function useQueryParamUpdater() {
 
       router.push(pathname + "?" + newParams.toString(), { scroll: false });
     },
-    [searchParams, pathname]
+    [searchParams, pathname, router]
   );
   return {
     setQueryParamArray,

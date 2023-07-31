@@ -1,13 +1,9 @@
 import { filters } from "@/lib/constants";
+import { PriceRange } from "@/types/shopify";
 import {
   PriceRangeFilter,
   ProductFilter,
 } from "@shopify/hydrogen-react/storefront-api-types";
-
-type PriceRange = {
-  minPrice?: string;
-  maxPrice?: string;
-};
 
 export const getPriceRangeFromQuery = (queryValues: string[]): PriceRange => {
   try {
@@ -134,6 +130,10 @@ export const buildProductFilterFromQueryParms = (
       return;
     } else if (filter.type === "LIST" && Array.isArray(filterValues)) {
       filterValues.forEach((filterValue) => {
+        if (filter.queryKey === "") {
+          return;
+        }
+
         let productFilter: ProductFilter = {};
         productFilter[filter.queryKey] = filterValue;
         productFilters.push(productFilter);
@@ -141,10 +141,11 @@ export const buildProductFilterFromQueryParms = (
       return;
     }
 
-    productFilter[filter.queryKey] = filterValues;
-    productFilters.push(productFilter);
-    return;
-    // queryTerm += `${filter.filterKey}:"${filterValues}" `;
+    if (!Array.isArray(filterValues) && filter.queryKey !== "") {
+      productFilter[filter.queryKey] = filterValues;
+      productFilters.push(productFilter);
+      return;
+    }
   });
 
   return productFilters;

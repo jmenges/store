@@ -62,3 +62,9 @@ export type ShopCurrency = {
   currencyCode: CurrencyCode;
   symbol: string;
 };
+
+
+export type PriceRange = {
+  minPrice?: string;
+  maxPrice?: string;
+};

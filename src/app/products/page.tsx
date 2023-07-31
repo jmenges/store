@@ -1,6 +1,7 @@
 import ProductFilter from "@/components/ProductGrid/ProductFilter";
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
-import { filters } from "@/lib/constants";
+import { filterQueryKeys } from "@/lib/constants";
+import { buildQueryFromQueryParms } from "@/lib/filter";
 import {
   getCollections,
   getProductCount,
@@ -9,8 +10,6 @@ import {
   getShopCurrency,
 } from "@/lib/shopify/operations";
 import { SearchParams } from "@/types";
-
-export const filterQueryKeys = filters.map((filter) => filter.urlKey);
 
 export default async function Products({
   searchParams,
@@ -22,7 +21,12 @@ export default async function Products({
     filterQueryKeys.includes(param[0])
   );
 
-  const productsData = getProducts({});
+  const query = buildQueryFromQueryParms(activeFilters);
+
+  const productsData = getProducts({
+    query,
+  });
+
   const productCountsData = getProductCount();
 
   const shopCurrencyData = getShopCurrency();

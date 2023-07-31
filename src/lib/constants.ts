@@ -12,7 +12,7 @@ export type FilterItem = {
   readonly title: string;
   readonly urlKey: string;
   readonly multipleOptions: boolean;
-  readonly queryKey: string;
+  readonly queryKey: "productType" | "";
   readonly filterKey: string;
   readonly type: "LIST" | "PRICE_RANGE";
 };
@@ -36,6 +36,8 @@ export const filters: readonly FilterItem[] = [
     type: "LIST",
   },
 ];
+
+export const filterQueryKeys = filters.map((filter) => filter.urlKey);
 
 /* Tags */
 export const TAGS = {
