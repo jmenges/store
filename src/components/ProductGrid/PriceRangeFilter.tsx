@@ -46,7 +46,7 @@ export default function PriceRangeFilter({
     setIsPriceRangeInvalid(!isPriceRangeValid);
 
     if (isPriceRangeValid) setQueryParamArray(urlKey, activeValues);
-  }, [minPrice, maxPrice, urlKey, setQueryParamArray ]);
+  }, [minPrice, maxPrice, urlKey, setQueryParamArray]);
 
   /* Handle filter updates based on external changes */
   useEffect(() => {

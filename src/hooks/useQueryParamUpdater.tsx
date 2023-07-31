@@ -51,9 +51,12 @@ export default function useQueryParamUpdater() {
     [searchParams, pathname, router]
   );
 
-  const removeFromQueryParams = (key: string) => {
-    setQueryParam(key);
-  };
+  const removeFromQueryParams = useCallback(
+    (key: string) => {
+      setQueryParam(key);
+    },
+    [setQueryParam]
+  );
 
   const removePairFromQueryParams = useCallback(
     (key: string, value: string) => {
