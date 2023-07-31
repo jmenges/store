@@ -1,14 +1,28 @@
 import { TAGS } from "@/lib/constants";
 import { shopifyFetch } from "@/lib/shopify/api";
+import { getCollectionsQuery } from "@/lib/shopify/queries/collection";
 import {
   getProductNodesQuery,
+  getProductTypesQuery,
   getProductsQuery,
 } from "@/lib/shopify/queries/product";
+import { getShopCurrencyQuery } from "@/lib/shopify/queries/shop";
+import { getCurrencySymbolFromCode } from "@/lib/shopify/utils";
 import {
+  GetCollectionsOperation,
   GetProductNodesOperation,
+  GetProductTypesOperation,
   GetProductsOperation,
+  GetShopCurrencyOperation,
 } from "@/types/operations";
-import { Connection, Product, ShopifyProduct } from "@/types/shopify";
+import {
+  Collection,
+  Connection,
+  Product,
+  ShopCurrency,
+  ShopifyCollection,
+  ShopifyProduct,
+} from "@/types/shopify";
 
 const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
 
@@ -56,7 +70,35 @@ const reshapeProducts = (products: ShopifyProduct[]) => {
   return reshapedProducts;
 };
 
+const reshapeCollections = (collections: ShopifyCollection[]) => {
+  const reshapedCollections = [];
+  for (const collection of collections) {
+    if (collection) {
+      const reshapedCollection = reshapeCollection(collection);
+
+      if (reshapedCollection) {
+        reshapedCollections.push(reshapedCollection);
+      }
+    }
+  }
+
+  return reshapedCollections;
+};
+
+const reshapeCollection = (collection: ShopifyCollection) => {
+  const { products, ...rest } = collection;
+
+  return {
+    ...rest,
+    productCount: products.edges.length,
+  };
+};
+
 /* Operations */
+
+/*
+ * Related to Products
+ */
 export async function getProducts({
   query,
   reverse,
@@ -79,7 +121,7 @@ export async function getProducts({
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 
-export async function getProductCount() {
+export async function getProductCount(): Promise<number> {
   const res = await shopifyFetch<GetProductNodesOperation>({
     query: getProductNodesQuery,
     tags: [TAGS.products],
@@ -87,4 +129,38 @@ export async function getProductCount() {
 
   const count = res.body.data.products.edges.length;
   return count || 0;
+}
+
+export async function getProductTypes(): Promise<string[]> {
+  const res = await shopifyFetch<GetProductTypesOperation>({
+    query: getProductTypesQuery,
+  });
+
+  return removeEdgesAndNodes(res.body.data.productTypes);
+}
+
+/**
+ * Related to shop
+ */
+export async function getShopCurrency(): Promise<ShopCurrency> {
+  const res = await shopifyFetch<GetShopCurrencyOperation>({
+    query: getShopCurrencyQuery,
+  });
+  const currencyCode = res.body.data.shop.paymentSettings.currencyCode;
+
+  return {
+    currencyCode,
+    symbol: getCurrencySymbolFromCode(currencyCode),
+  };
+}
+
+/**
+ * Related to Collections
+ */
+export async function getCollections(): Promise<Collection[]> {
+  const res = await shopifyFetch<GetCollectionsOperation>({
+    query: getCollectionsQuery,
+    tags: [TAGS.collections],
+  });
+  return reshapeCollections(removeEdgesAndNodes(res.body?.data?.collections));
 }

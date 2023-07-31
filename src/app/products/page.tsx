@@ -1,24 +1,61 @@
+import ProductFilter from "@/components/ProductGrid/ProductFilter";
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
-import { getProductCount, getProducts } from "@/lib/shopify/operations";
+import { filters } from "@/lib/constants";
+import {
+  getCollections,
+  getProductCount,
+  getProductTypes,
+  getProducts,
+  getShopCurrency,
+} from "@/lib/shopify/operations";
+import { SearchParams } from "@/types";
 
-export default async function Products() {
+export const filterQueryKeys = filters.map((filter) => filter.urlKey);
+
+export default async function Products({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  // object entries is in the format [key, value | values][]
+  const activeFilters = Object.entries(searchParams).filter((param) =>
+    filterQueryKeys.includes(param[0])
+  );
+
   const productsData = getProducts({});
   const productCountsData = getProductCount();
 
-  const [products, productCounts] = await Promise.all([
-    productsData,
-    productCountsData,
-  ]);
+  const shopCurrencyData = getShopCurrency();
+  const collectionsData = getCollections();
+  const productTypesData = getProductTypes();
+
+  const [products, productCounts, productTypes, collections, shopCurrency] =
+    await Promise.all([
+      productsData,
+      productCountsData,
+      productTypesData,
+      collectionsData,
+      shopCurrencyData,
+    ]);
 
   return (
     <div className="mt-4">
       {/* Content */}
       <main className="container relative mx-auto mb-12 flex">
-        <div className="w-4/4">
+        <ProductFilter
+          currencySymbol={shopCurrency.symbol}
+          activeFilters={activeFilters}
+          productTypes={productTypes}
+          collections={collections}
+          className="sticky top-0 mr-8 h-fit w-1/4 pt-4"
+        />
+        <div className="w-3/4 flex-1">
           <div className="text-sm">
             <div className="flex w-full items-center">
               <p>
-                Showing <span className="font-medium">{products.length}</span> results from a total of <span className="font-medium">{productCounts}</span>.
+                Showing <span className="font-medium">{products.length}</span>{" "}
+                results from a total of
+                <span className="font-medium">{productCounts}</span>.
               </p>
             </div>
             <ProductGrid className="pt-4" products={products} />;

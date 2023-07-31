@@ -2,6 +2,8 @@ import {
   ProductVariant as ShopifyProductVariant,
   Image as ShopifyImage,
   Product as StorefrontProduct,
+  Collection as StorefrontCollection,
+  CurrencyCode,
 } from "@shopify/hydrogen-react/storefront-api-types";
 
 export type Maybe<T> = T | null;
@@ -41,7 +43,22 @@ export type ShopifyProduct = Pick<
   | "variants"
 >;
 
+export type ShopifyCollection = Pick<
+  StorefrontCollection,
+  "id" | "handle" | "title" | "image" | "products"
+>;
+
+export type Collection = Omit<ShopifyCollection, "products"> & {
+  products?: Product[];
+  productCount: number;
+};
+
 export type Product = Omit<ShopifyProduct, "images" | "variants"> & {
   variants: ProductVariant[];
   images: Image[];
+};
+
+export type ShopCurrency = {
+  currencyCode: CurrencyCode;
+  symbol: string;
 };

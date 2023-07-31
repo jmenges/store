@@ -8,6 +8,35 @@ type NavItem = {
   href: string;
 };
 
+export type FilterItem = {
+  readonly title: string;
+  readonly urlKey: string;
+  readonly multipleOptions: boolean;
+  readonly queryKey: string;
+  readonly filterKey: string;
+  readonly type: "LIST" | "PRICE_RANGE";
+};
+
+/* Filtering */
+export const filters: readonly FilterItem[] = [
+  {
+    title: "Category",
+    urlKey: "category",
+    multipleOptions: true,
+    queryKey: "productType",
+    filterKey: "product_type",
+    type: "LIST",
+  },
+  {
+    title: "Price",
+    urlKey: "price",
+    multipleOptions: true,
+    queryKey: "",
+    filterKey: "variants.price",
+    type: "LIST",
+  },
+];
+
 /* Tags */
 export const TAGS = {
   collections: "collections",
