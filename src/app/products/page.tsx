@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ActiveFilterChips from "@/components/ProductGrid/ActiveFilterChips";
 import MobileProductFilter from "@/components/ProductGrid/MobileProductFilter";
 import ProductFilter from "@/components/ProductGrid/ProductFilter";
@@ -54,6 +55,14 @@ export default async function Products({
 
   return (
     <div className="mt-4">
+      <Breadcrumbs
+        title="Products"
+        items={[
+          { title: "Home", href: "/" },
+          { title: "Shop", href: "/products" },
+        ]}
+      />
+      
       {/* Content */}
       <main className="container relative mx-auto mb-12 flex">
         <ProductFilter
