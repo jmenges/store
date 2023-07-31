@@ -1,21 +1,40 @@
-type Menu = {
-  title: string;
-  items: NavItem[];
+import { FilterItem, Menu, SortItem } from "@/types";
+
+/* Sorting */
+export const defaultSortOption: SortItem = {
+  title: "Relevance",
+  urlValue: "",
+  sortKey: "RELEVANCE",
+  reverse: false,
 };
 
-type NavItem = {
-  title: string;
-  href: string;
-};
-
-export type FilterItem = {
-  readonly title: string;
-  readonly urlKey: string;
-  readonly multipleOptions: boolean;
-  readonly queryKey: "productType" | "";
-  readonly filterKey: string;
-  readonly type: "LIST" | "PRICE_RANGE";
-};
+export const sortOptions: readonly SortItem[] = [
+  defaultSortOption,
+  {
+    title: "Trending",
+    urlValue: "trending-desc",
+    sortKey: "BEST_SELLING",
+    reverse: false,
+  }, // asc
+  {
+    title: "Latest arrivals",
+    urlValue: "latest-desc",
+    sortKey: "CREATED_AT",
+    reverse: true,
+  },
+  {
+    title: "Price: Low to high",
+    urlValue: "price-asc",
+    sortKey: "PRICE",
+    reverse: false,
+  }, // asc
+  {
+    title: "Price: High to low",
+    urlValue: "price-desc",
+    sortKey: "PRICE",
+    reverse: true,
+  },
+] as const;
 
 /* Filtering */
 export const filters: readonly FilterItem[] = [

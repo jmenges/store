@@ -1,5 +1,6 @@
 import ProductFilter from "@/components/ProductGrid/ProductFilter";
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
+import ProductSorter from "@/components/ProductGrid/ProductSorter";
 import { filterQueryKeys } from "@/lib/constants";
 import { buildQueryFromQueryParms } from "@/lib/filter";
 import {
@@ -61,6 +62,7 @@ export default async function Products({
                 results from a total of
                 <span className="font-medium">{productCounts}</span>.
               </p>
+              <ProductSorter className="ml-auto min-w-[200px] flex-shrink-0" />
             </div>
             <ProductGrid className="pt-4" products={products} />;
           </div>
