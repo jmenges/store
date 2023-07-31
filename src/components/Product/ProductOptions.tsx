@@ -94,7 +94,7 @@ function ProductOptionLink({
   optionSearchParams.set(optionName, optionValue);
 
   return (
-    <Link {...props} replace href={`?${optionSearchParams.toString()}`}>
+    <Link {...props} scroll={false} replace href={`?${optionSearchParams.toString()}`}>
       {label}
     </Link>
   );
@@ -128,6 +128,7 @@ export function ProductOptionColorLink({
       className={className}
       {...props}
       replace
+      scroll={false}
       href={`?${optionSearchParams.toString()}`}
     />
   );
