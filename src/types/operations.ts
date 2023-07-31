@@ -13,6 +13,13 @@ export type GetProductsOperation = {
   };
 };
 
+export type GetProductOperation = {
+  data: { product: ShopifyProduct };
+  variables: {
+    handle: string;
+  };
+};
+
 export type GetProductNodesOperation = {
   data: {
     products: Connection<{ id: string }>;
@@ -22,6 +29,14 @@ export type GetProductNodesOperation = {
 export type GetProductTypesOperation = {
   data: {
     productTypes: Connection<string>;
+  };
+};
+export type GetProductRecommendationsOperation = {
+  data: {
+    productRecommendations: ShopifyProduct[];
+  };
+  variables: {
+    productId: string;
   };
 };
 

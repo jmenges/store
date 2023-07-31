@@ -2,6 +2,7 @@ import {
   ProductVariant as ShopifyProductVariant,
   Image as ShopifyImage,
   Product as StorefrontProduct,
+  ProductOption as ShopifyProductOption,
   Collection as StorefrontCollection,
   CurrencyCode,
 } from "@shopify/hydrogen-react/storefront-api-types";
@@ -41,6 +42,7 @@ export type ShopifyProduct = Pick<
   | "productType"
   | "images"
   | "variants"
+  | "metafields"
 >;
 
 export type ShopifyCollection = Pick<
@@ -63,8 +65,12 @@ export type ShopCurrency = {
   symbol: string;
 };
 
-
 export type PriceRange = {
   minPrice?: string;
   maxPrice?: string;
 };
+
+export type ProductOption = Pick<
+  ShopifyProductOption,
+  "id" | "name" | "values"
+>;

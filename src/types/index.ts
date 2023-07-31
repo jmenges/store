@@ -2,6 +2,8 @@ import { sortOptions } from "@/lib/constants";
 
 export type SearchParams = { [key: string]: string | string[] | undefined };
 
+
+
 export type Menu = {
   title: string;
   items: NavItem[];

@@ -3,6 +3,8 @@ import { shopifyFetch } from "@/lib/shopify/api";
 import { getCollectionsQuery } from "@/lib/shopify/queries/collection";
 import {
   getProductNodesQuery,
+  getProductQuery,
+  getProductRecommendationsQuery,
   getProductTypesQuery,
   getProductsQuery,
 } from "@/lib/shopify/queries/product";
@@ -11,6 +13,8 @@ import { getCurrencySymbolFromCode } from "@/lib/shopify/utils";
 import {
   GetCollectionsOperation,
   GetProductNodesOperation,
+  GetProductOperation,
+  GetProductRecommendationsOperation,
   GetProductTypesOperation,
   GetProductsOperation,
   GetShopCurrencyOperation,
@@ -129,6 +133,32 @@ export async function getProductCount(): Promise<number> {
 
   const count = res.body.data.products.edges.length;
   return count || 0;
+}
+
+export async function getProduct(handle: string): Promise<Product | undefined> {
+  const res = await shopifyFetch<GetProductOperation>({
+    query: getProductQuery,
+    tags: [TAGS.products],
+    variables: {
+      handle,
+    },
+  });
+
+  return reshapeProduct(res.body.data.product, false);
+}
+
+export async function getProductRecommendations(
+  productId: string
+): Promise<Product[]> {
+  const res = await shopifyFetch<GetProductRecommendationsOperation>({
+    query: getProductRecommendationsQuery,
+    tags: [TAGS.products],
+    variables: {
+      productId,
+    },
+  });
+
+  return reshapeProducts(res.body.data.productRecommendations);
 }
 
 export async function getProductTypes(): Promise<string[]> {
