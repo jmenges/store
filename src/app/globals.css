@@ -34,7 +34,7 @@
     --ring: 217.9 10.6% 64.9%;
 
     --radius: 0.5rem;
-    
+
     --current-color: theme("colors.current");
   }
 
@@ -76,6 +76,15 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Remove stepper von number inputs */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
   }
 }
 
