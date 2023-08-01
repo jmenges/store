@@ -41,13 +41,15 @@ export default function CartItem({ item }: Props) {
         isPending ? "bg-disabled-animate" : ""
       )}
     >
-      <Image
-        className="rounded-sm"
-        height={80}
-        width={80}
-        src={item.merchandise.image.url}
-        alt={item.merchandise.image.altText}
-      />
+      {item.merchandise.image?.url !== undefined ? (
+        <Image
+          className="rounded-sm"
+          height={80}
+          width={80}
+          src={item.merchandise.image.url}
+          alt={item.merchandise.image.altText || ""}
+        />
+      ) : null}
       <div className="flex flex-1 flex-col">
         {/* Info & Remove */}
         <div className="flex flex-1 items-start justify-between">
