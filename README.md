@@ -1,6 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Portfilio Project - Headless Ecommerce Store with Shopify
 
-## Getting Started
+**Details**
+
+* NextJs 13.4 with App directory
+* New server actions for clientside server updates
+* Focus on using server components
+* Shopiy Storefront API 2023/07
+* Animations with framer-motion
+* Component library: shadcn
+
+**Implemented Functionality**
+
+* With sorting & filtering
+  * Products
+  * Collections
+* Product details with variant selector
+* Cart
+
+## Credits
 
 Company Icons: [https://icons8.com/](https://icons8.com/)
 
