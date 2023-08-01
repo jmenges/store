@@ -3,11 +3,14 @@ import {
   Image as ShopifyImage,
   Product as StorefrontProduct,
   ProductOption as ShopifyProductOption,
+  ProductFilter,
   Collection as StorefrontCollection,
   Cart as StorefrontCart,
   CartLine as StorefrontCartLine,
   CurrencyCode,
 } from "@shopify/hydrogen-react/storefront-api-types";
+
+export type { ProductFilter };
 
 export type Maybe<T> = T | null;
 

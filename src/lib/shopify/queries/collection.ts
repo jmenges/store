@@ -1,4 +1,5 @@
 import imageFragment from "@/lib/shopify/fragments/image";
+import productFragment from "@/lib/shopify/fragments/product";
 
 const collectionFragment = /* GraphQL */ `
   fragment collection on Collection {
@@ -39,4 +40,29 @@ export const getCollectionsQuery = /* GraphQL */ `
     }
   }
   ${collectionFragment}
+`;
+
+export const getCollectionProductsQuery = /* GraphQL */ `
+  query getCollectionProducts(
+    $handle: String!
+    $sortKey: ProductCollectionSortKeys
+    $reverse: Boolean
+    $filters: [ProductFilter!]
+  ) {
+    collection(handle: $handle) {
+      products(
+        sortKey: $sortKey
+        reverse: $reverse
+        first: 100
+        filters: $filters
+      ) {
+        edges {
+          node {
+            ...product
+          }
+        }
+      }
+    }
+  }
+  ${productFragment}
 `;

@@ -58,6 +58,21 @@ export type GetCollectionsOperation = {
   };
 };
 
+
+export type GetCollectionProductsOperation = {
+  data: {
+    collection: {
+      products: Connection<ShopifyProduct>;
+    };
+  };
+  variables: {
+    handle: string;
+    reverse?: boolean;
+    sortKey?: string;
+    filters?: ProductFilter[];
+  };
+};
+
 /* Cart */
 export type GetCartOperation = {
   data: {
