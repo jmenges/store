@@ -1,9 +1,11 @@
-import Cart from '@/components/Cart/Cart';
-import { createCart, getCart } from '@/lib/shopify/operations/cart';
-import { cookies } from 'next/headers';
+import Cart from "@/components/Cart/Cart";
+import { createCart, getCart } from "@/lib/shopify/operations/cart";
+import { cookies } from "next/headers";
 
-export default async function CartLoader() {
-  const cartId = cookies().get('cartId')?.value;
+type Props = { className?: string };
+
+export default async function CartLoader({ className }: Props) {
+  const cartId = cookies().get("cartId")?.value;
   let cartIdUpdated = false;
   let cart;
 
@@ -20,5 +22,5 @@ export default async function CartLoader() {
     cartIdUpdated = true;
   }
 
-  return <Cart cartIdUpdated={cartIdUpdated} cart={cart}></Cart>;
+  return <Cart className={className} cartIdUpdated={cartIdUpdated} cart={cart}></Cart>;
 }

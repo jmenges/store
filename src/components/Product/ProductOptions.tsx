@@ -46,8 +46,6 @@ export default function ProductOptions({
                       color={value}
                       active={valueActive}
                       searchParams={searchParams}
-                      optionName={option.name}
-                      optionValue={value}
                     />
                   );
                 }

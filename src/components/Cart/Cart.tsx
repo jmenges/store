@@ -4,11 +4,10 @@ import CartItem from "@/components/Cart/CartItem";
 import ShippingCostProgress from "@/components/Cart/ShippingCostProgress";
 import Price from "@/components/Price";
 import { useCart } from "@/components/context/cart-context";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -16,13 +15,14 @@ import {
 import { getCurrencySymbolFromCode } from "@/lib/shopify/utils";
 import { cn } from "@/lib/utils";
 import { Cart } from "@/types/shopify";
+import Link from "next/link";
 import { useEffect } from "react";
 
 import SolarCartLargeMinimalisticOutline from "~icons/solar/cart-large-minimalistic-outline.jsx";
 
-type Props = { cart: Cart; cartIdUpdated: boolean };
+type Props = { cart: Cart; cartIdUpdated: boolean; className?: string };
 
-export default function Cart({ cart, cartIdUpdated }: Props) {
+export default function Cart({ cart, cartIdUpdated, className }: Props) {
   const { cartOpen, toggleCart } = useCart();
 
   useEffect(() => {
@@ -34,7 +34,11 @@ export default function Cart({ cart, cartIdUpdated }: Props) {
   return (
     <Sheet open={cartOpen} onOpenChange={toggleCart}>
       <SheetTrigger
-        className={cn(buttonVariants({ size: "icon", variant: "ghost" }),"pl-2 pr-1")}
+        className={cn(
+          buttonVariants({ size: "icon", variant: "ghost" }),
+          "pl-2 pr-1",
+          className
+        )}
       >
         <SolarCartLargeMinimalisticOutline className="h-4 w-4 stroke-current stroke-[0.5px]" />
         <span className="-mt-2 ml-0.5 text-xs ">{cart.totalQuantity}</span>
@@ -47,34 +51,44 @@ export default function Cart({ cart, cartIdUpdated }: Props) {
               {cart.totalQuantity}
             </span>
           </SheetTitle>
-          <SheetDescription className="flex flex-col gap-4">
-            <ShippingCostProgress
-              total={Number(cart.cost.totalAmount.amount)}
-              currencySymbol={getCurrencySymbolFromCode(
-                cart.cost.totalAmount.currencyCode
-              )}
-              freeShippingFrom={100}
-            />
-
-            {/* Cart Items */}
-            {cart.lines.map((cartItem) => (
-              <CartItem key={cartItem.id} item={cartItem} />
-            ))}
-
-            <div className="mt-auto flex justify-between border-t border-gray-200 px-4 pt-4">
-              <h3 className="text-lg font-semibold text-black">Subtotal</h3>
-              <Price
-                className="font-semibold text-black"
-                amount={cart.cost.totalAmount.amount}
-                currencyCode={cart.cost.totalAmount.currencyCode}
-              />
-            </div>
-            <div className="mb-4 flex gap-2 px-4 [&>*]:flex-1">
-              <Button variant="outline">View Cart</Button>
-              <Button>Checkout</Button>
-            </div>
-          </SheetDescription>
         </SheetHeader>
+        <div className="flex flex-col flex-1 gap-4">
+          <ShippingCostProgress
+            total={Number(cart.cost.totalAmount.amount)}
+            currencySymbol={getCurrencySymbolFromCode(
+              cart.cost.totalAmount.currencyCode
+            )}
+            freeShippingFrom={100}
+          />
+
+          {/* Cart Items */}
+          {cart.lines.map((cartItem) => (
+            <CartItem key={cartItem.id} item={cartItem} />
+          ))}
+
+          <div className="mt-auto flex justify-between border-t border-gray-200 px-4 pt-4">
+            <h3 className="text-lg font-semibold text-black">Subtotal</h3>
+            <Price
+              className="font-semibold text-black"
+              amount={cart.cost.totalAmount.amount}
+              currencyCode={cart.cost.totalAmount.currencyCode}
+            />
+          </div>
+          <div className="mb-4 flex gap-2 px-4 [&>*]:flex-1">
+            <Link
+              href="/cart"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              View Cart
+            </Link>
+            <Link
+              href={cart.checkoutUrl}
+              className={buttonVariants({ variant: "default" })}
+            >
+              Checkout
+            </Link>
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   );
