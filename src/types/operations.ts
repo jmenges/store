@@ -1,5 +1,13 @@
-import { Connection, ShopifyCart, ShopifyCollection, ShopifyProduct } from "@/types/shopify";
-import { CurrencyCode } from "@shopify/hydrogen-react/storefront-api-types";
+import {
+  Connection,
+  ShopifyCart,
+  ShopifyCollection,
+  ShopifyProduct,
+} from "@/types/shopify";
+import {
+  CurrencyCode,
+  ProductFilter,
+} from "@shopify/hydrogen-react/storefront-api-types";
 
 /* Products */
 export type GetProductsOperation = {
@@ -57,7 +65,6 @@ export type GetCollectionsOperation = {
     collections: Connection<ShopifyCollection>;
   };
 };
-
 
 export type GetCollectionProductsOperation = {
   data: {
