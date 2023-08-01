@@ -39,7 +39,7 @@ export default function AddToCartButton({ productTitle, variant }: Props) {
       />
       <Button
         onClick={addToCartClick}
-        className="min-w-[160px] font-light transition-all"
+        className="min-w-[160px] transition-all"
       >
         {isPending ? (
           <Spinner className="mr-2 h-5 w-5 stroke-current text-white" />

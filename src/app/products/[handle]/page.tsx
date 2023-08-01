@@ -17,6 +17,7 @@ import {
   getProductRecommendations,
 } from "@/lib/shopify/operations/product";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import AddToCartButton from "@/components/Cart/AddToCartButton";
 
 type ValidSearchParams = {
   [key: string]: string;
@@ -103,6 +104,7 @@ export default async function Product({
               />
             )}
             <Separator className="my-6" />
+            <AddToCartButton productTitle={product.title} variant={activeVariant} />
           </div>
         </div>
         {/* Product Information */}
