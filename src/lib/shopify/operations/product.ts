@@ -13,19 +13,15 @@ import {
   GetProductOperation,
   GetProductRecommendationsOperation,
   GetProductTypesOperation,
-  GetProductsOperation
+  GetProductsOperation,
 } from "@/types/operations";
-import {
-  Product,
-  ShopifyProduct
-} from "@/types/shopify";
+import { Product, ShopifyProduct } from "@/types/shopify";
 
 const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
 
 /*
  * Shared functions
  */
-
 
 const reshapeProduct = (
   product: ShopifyProduct,
@@ -67,10 +63,12 @@ export async function getProducts({
   query,
   reverse,
   sortKey,
+  first,
 }: {
   query?: string;
   reverse?: boolean;
   sortKey?: string;
+  first?: number;
 }): Promise<Product[]> {
   const res = await shopifyFetch<GetProductsOperation>({
     query: getProductsQuery,
@@ -79,6 +77,7 @@ export async function getProducts({
       query,
       reverse,
       sortKey,
+      first,
     },
   });
 
@@ -128,4 +127,3 @@ export async function getProductTypes(): Promise<string[]> {
 
   return removeEdgesAndNodes(res.body.data.productTypes);
 }
-

@@ -18,6 +18,7 @@ export type GetProductsOperation = {
     query?: string;
     reverse?: boolean;
     sortKey?: string;
+    first?: number;
   };
 };
 
