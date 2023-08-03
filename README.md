@@ -16,6 +16,9 @@ Portfilio Project - Headless Ecommerce Store with Shopify
   * Collections
 * Product details with variant selector
 * Cart
+* Search
+  * Searchbar with dynamic search results
+  * Search page
 
 ## Credits
 
