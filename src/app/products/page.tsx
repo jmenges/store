@@ -41,7 +41,7 @@ export default async function Products({
   const productCountsData = getProductCount();
 
   const shopCurrencyData = getShopCurrency();
-  const collectionsData = getCollections();
+  const collectionsData = getCollections({});
   const productTypesData = getProductTypes();
 
   const [products, productCounts, productTypes, collections, shopCurrency] =

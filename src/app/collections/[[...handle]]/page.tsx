@@ -47,7 +47,7 @@ export default async function Collection({
   });
 
   const shopCurrencyData = getShopCurrency();
-  const collectionsData = getCollections();
+  const collectionsData = getCollections({});
   const productTypesData = getProductTypes();
 
   const [products, shopCurrency, collections, productTypes] = await Promise.all(
