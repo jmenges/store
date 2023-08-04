@@ -1,4 +1,5 @@
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
+import { ShopifyImage } from "@/components/ui/ShopifyImage";
 import { Button } from "@/components/ui/button";
 import { getCollections } from "@/lib/shopify/operations/collection";
 import { getProducts } from "@/lib/shopify/operations/product";
@@ -7,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const collections = await getCollections({first:3});
+  const collections = await getCollections({ first: 3 });
   const bestSellingProducts = await getProducts({
     sortKey: "BEST_SELLING",
   });
@@ -52,9 +53,13 @@ export default async function Home() {
             .filter((map) => map.handle !== "")
             .map((collection) => {
               return (
-                <Link className="group flex flex-col" href={`/collections/`}>
+                <Link
+                  key={collection.id}
+                  className="group flex flex-col"
+                  href={`/collections/`}
+                >
                   <div className="overflow-hidden">
-                    <Image
+                    <ShopifyImage
                       src={collection?.image?.url}
                       alt={collection?.image?.altText || collection.title}
                       width={1000}
