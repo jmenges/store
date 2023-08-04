@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { footerNav } from "@/lib/constants";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -13,7 +14,7 @@ type Props = {};
 
 export default function Footer({}: Props) {
   return (
-    <footer className="relative bg-black pb-8 pt-12 text-white">
+    <footer className="relative bg-black pb-10 pt-14 text-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap gap-y-4 text-left lg:text-left">
           <div className="w-full px-4 lg:w-3/12 ">
@@ -78,7 +79,8 @@ export default function Footer({}: Props) {
             </div>
           </div>
         </div>
-        <hr className="mt-12 mb-6" />
+        <Separator className="mt-12 mb-8 bg-gray-400" />
+        {/* <hr className="mt-12 mb-6" /> */}
         <div className="flex flex-wrap gap-y-2 items-center justify-center font-light md:justify-between">
           <div className="mx-auto text-sm w-full flex gap-4 md:w-6/12">
             <span className="">Copyright 2023 © Jonas Menges</span>
