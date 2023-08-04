@@ -24,7 +24,7 @@ const SearchOverlayContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "absolute z-50 gap-4 bg-background h-full transition-all flex flex-col inset-x-0 top-0 border-b data-[state=closed]:w-0 data-[state=open]:w-full data-[state=open]:animate-grow data-[state=closed]:animate-shrink overflow-hidden",
+        "absolute z-50 gap-4 bg-background h-full transition-all flex flex-col inset-x-0 top-0 data-[state=closed]:w-0 data-[state=open]:w-full data-[state=open]:animate-grow data-[state=closed]:animate-shrink overflow-hidden",
         className
       )}
       {...props}

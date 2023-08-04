@@ -23,6 +23,7 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import debounce from "lodash.debounce";
+import HeroIcon from "@/components/ui/HeroIcon";
 
 type Props = { className?: string };
 
@@ -105,7 +106,7 @@ export default function SearchBar({ className }: Props) {
         )}
         onClick={showSearchBar}
       >
-        <MagnifyingGlassIcon className="w-4 h-4" />
+        <HeroIcon><MagnifyingGlassIcon className="w-4 h-4" /></HeroIcon>
       </SearchOverlayTrigger>
       <SearchOverlayContent
         onOpenAutoFocus={(e) => {
