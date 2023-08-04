@@ -1,6 +1,6 @@
 Portfilio Project - Headless Ecommerce Store with Shopify
 
-**Details**
+##### **Details**
 
 * NextJs 13.4 with App directory
 * New server actions for clientside server updates
@@ -9,7 +9,7 @@ Portfilio Project - Headless Ecommerce Store with Shopify
 * Animations with framer-motion
 * Component library: shadcn
 
-**Implemented Functionality**
+##### **Implemented Functionality**
 
 * With sorting & filtering
   * Products
@@ -19,6 +19,13 @@ Portfilio Project - Headless Ecommerce Store with Shopify
 * Search
   * Searchbar with dynamic search results
   * Search page
+* Wishlist
+
+##### **Open Points**
+
+* Improve layout
+* Better animations (Page transitions, content loading)
+* Optimize image loading
 
 ## Credits
 
