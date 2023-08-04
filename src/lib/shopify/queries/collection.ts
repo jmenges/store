@@ -30,8 +30,8 @@ export const getCollectionQuery = /* GraphQL */ `
 `;
 
 export const getCollectionsQuery = /* GraphQL */ `
-  query getCollections {
-    collections(first: 100, sortKey: TITLE) {
+  query getCollections($first: Int = 100) {
+    collections(first: $first, sortKey: TITLE) {
       edges {
         node {
           ...collection
