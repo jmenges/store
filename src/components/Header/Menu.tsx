@@ -8,7 +8,9 @@ type Props = { className?: string };
 export default function Menu({ className }: Props) {
   return (
     <div className={cn("flex gap-4 items-center text-sm", className)}>
-      <Link href={"/products"}>Shop</Link>
+      <Link className="font-medium" href={"/products"}>
+        Shop
+      </Link>
       <Link href="/">
         <Image
           src="/StoreLogo.svg"
@@ -18,7 +20,9 @@ export default function Menu({ className }: Props) {
           className=""
         />
       </Link>
-      <Link href="/collections">Collections</Link>
+      <Link className="font-medium" href="/collections">
+        Collections
+      </Link>
     </div>
   );
 }
