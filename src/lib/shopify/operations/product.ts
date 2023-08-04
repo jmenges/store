@@ -5,6 +5,7 @@ import {
   getProductQuery,
   getProductRecommendationsQuery,
   getProductTypesQuery,
+  getProductsByIdsQuery,
   getProductsQuery,
 } from "@/lib/shopify/queries/product";
 import { removeEdgesAndNodes } from "@/lib/shopify/utils";
@@ -13,6 +14,7 @@ import {
   GetProductOperation,
   GetProductRecommendationsOperation,
   GetProductTypesOperation,
+  GetProductsByIdsOperation,
   GetProductsOperation,
 } from "@/types/operations";
 import { Product, ShopifyProduct } from "@/types/shopify";
@@ -82,6 +84,22 @@ export async function getProducts({
   });
 
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+}
+
+export async function getProductsByIds({
+  ids,
+}: {
+  ids: string[];
+}): Promise<Product[]> {
+  const res = await shopifyFetch<GetProductsByIdsOperation>({
+    query: getProductsByIdsQuery,
+    tags: [TAGS.products],
+    variables: {
+      ids,
+    },
+  });
+
+  return reshapeProducts(res.body.data.nodes);
 }
 
 export async function getProductCount(): Promise<number> {

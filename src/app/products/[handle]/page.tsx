@@ -4,20 +4,21 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { headers } from "next/headers";
 
+import Breadcrumbs from "@/components/Breadcrumbs";
+import AddToCartButton from "@/components/Cart/AddToCartButton";
 import Price from "@/components/Price";
-import { SearchParams } from "@/types";
 import ProductImages from "@/components/Product/ProductImages";
-import ProductRating from "@/components/Product/ProductRating";
 import ProductOptions from "@/components/Product/ProductOptions";
+import ProductRating from "@/components/Product/ProductRating";
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
-import { ProductOption } from "@shopify/hydrogen-react/storefront-api-types";
-import { ProductVariant } from "@/types/shopify";
+import WishlistButton from "@/components/Wishlist/WishlistButton";
 import {
   getProduct,
   getProductRecommendations,
 } from "@/lib/shopify/operations/product";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import AddToCartButton from "@/components/Cart/AddToCartButton";
+import { SearchParams } from "@/types";
+import { ProductVariant } from "@/types/shopify";
+import { ProductOption } from "@shopify/hydrogen-react/storefront-api-types";
 
 type ValidSearchParams = {
   [key: string]: string;
@@ -83,6 +84,7 @@ export default async function Product({
         <div className="flex flex-col md:flex-row md:items-start gap-4">
           <ProductImages className="md:w-3/5" images={product.images} />
           <div className="md:w-2/5 p-4">
+            <WishlistButton className="float-right" productId={product.id} />
             <h1 className="mb-2 text-3xl font-bold">{product.title}</h1>
             <ProductRating className="mb-2" rating={4} />
             <Price

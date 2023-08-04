@@ -22,6 +22,15 @@ export type GetProductsOperation = {
   };
 };
 
+export type GetProductsByIdsOperation = {
+  data: {
+    nodes: ShopifyProduct[];
+  };
+  variables: {
+    ids: string[];
+  };
+};
+
 export type GetProductOperation = {
   data: { product: ShopifyProduct };
   variables: {
@@ -64,6 +73,9 @@ export type GetShopCurrencyOperation = {
 export type GetCollectionsOperation = {
   data: {
     collections: Connection<ShopifyCollection>;
+  };
+  variables: {
+    first?: number;
   };
 };
 
