@@ -19,6 +19,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Store - Portfolio",
   description: "Discover your next look",
+  robots: "noindex",
 };
 
 type LayoutProps = {
