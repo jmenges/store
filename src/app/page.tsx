@@ -1,11 +1,18 @@
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
 import { ShopifyImage } from "@/components/ui/ShopifyImage";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { getCollections } from "@/lib/shopify/operations/collection";
 import { getProducts } from "@/lib/shopify/operations/product";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
+
+import newsletterImage from "/public/landing/newsletter.webp";
+import image2 from "/public/landing/collection.jpeg";
+
+import HeroSlider from "@/components/HeroSlider";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export default async function Home() {
   const collections = await getCollections({ first: 3 });
@@ -14,41 +21,19 @@ export default async function Home() {
   });
 
   return (
-    <main className="relative mb-24 flex flex-col items-center justify-between py-4">
+    <main className="relative -mt-[68px] flex flex-col items-center justify-between">
       {/* Hero */}
-      <div className="relative container mx-auto  flex min-h-screen w-full overflow-clip bg-gray-200/60">
-        <div className="z-10 mb-32 flex flex-col items-center p-8 md:w-1/2 md:justify-center md:p-12 lg:w-3/5 lg:p-16">
-          <p className="w-full font-light lg:text-lg ">New Arrivals</p>
-          <h2 className="mb-4 text-6xl text-[4.2rem] font-semibold lg:text-7xl">
-            A collection made for you
-          </h2>
-          <p className="text-lg font-light lg:text-xl">
-            Aliquam lorem ante, dapibus in, viverra quister, feugiat a, tellus.
-            Phasellus viverra nulla utme.
-          </p>
-          <Button
-            className="text-md mr-auto mt-6 px-8 py-6"
-            variant="default"
-            size="lg"
-          >
-            Shop Now
-          </Button>
-        </div>
-        <div className="absolute right-[-5%] top-[10%] h-[60vw] min-h-[600px] w-[60vw] min-w-[600px] rounded-[100%] bg-sky-800/20 md:top-[15%] "></div>
-        <div className="absolute right-5 top-[10%] w-[40vw] min-w-[500px]">
-          <Image src="/hero.png" height={1024} width={683} alt="hero" />
-        </div>
-      </div>
+      <HeroSlider className="h-screen max-h-[960px] overflow-clip" />
       {/* Shop by Categories */}
       <div className="mb-24 mt-16">
         <div className="text-center">
           <div className="relative mb-2 inline-flex items-center">
             <span className="mr-2 h-[1px] w-6 bg-black"></span>
-            <span className="text-sm uppercase">New Collection</span>
+            <span className="text-sm uppercase">The essentials</span>
           </div>
           <h3 className="text-3xl">Shop by Collections </h3>
         </div>
-        <div className="mt-12 grid max-w-5xl grid-cols-3 gap-6">
+        <div className="mt-12 container mx-auto grid grid-cols-3 gap-6">
           {collections
             .filter((map) => map.handle !== "")
             .map((collection) => {
@@ -78,8 +63,12 @@ export default async function Home() {
             })}
         </div>
       </div>
-      {/*   */}
-      <div className="container my-24 max-w-5xl px-0">
+      {/*  Partners  */}
+      <div className="container mt-18 mb-24">
+        <div className="relative mb-2 inline-flex items-center">
+          <span className="mr-2 h-[1px] w-6 bg-black"></span>
+          <span className="text-sm uppercase">Our partners</span>
+        </div>
         <div className="flex justify-between gap-4 border-y border-gray-300 py-8 ">
           <Link href="#">
             <Image
@@ -128,8 +117,35 @@ export default async function Home() {
           </Link>
         </div>
       </div>
+      {/* Sustainable Vales */}
+      <div className="flex w-full relative">
+        <Image
+          src={image2}
+          height={700}
+          className="object-cover w-full max-h-[600px]"
+          alt={""}
+        />
+
+        <div className="lg:mt-12 absolute space-y-4 lg:w-1/3 p-12 h-full overflow-clip">
+          <h2 className="text-xl lg:text-3xl font-thin">
+            Explore Our Exclusive Spring Collection for Women, Designed by Tim 
+            Freedman. Enjoy Complimentary Shipping on Orders Over €60.
+          </h2>
+          <Link
+            href="/collections/women/"
+            className={cn(
+              "overflow-hiden group flex items-center transition-all",
+              buttonVariants()
+            )}
+          >
+            Shop Now
+            <ArrowRightIcon className="h-4 w-4 ml-2 transition-all group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </div>
+
       {/* Shop by Bestsellers */}
-      <div className="container mx-auto mt-12 w-full">
+      <div className="container mx-auto mt-24 w-full">
         <div className="mb-8 flex w-full items-end justify-between">
           <div>
             <div className="relative mb-2 inline-flex items-center">
@@ -147,6 +163,27 @@ export default async function Home() {
           </Link>
         </div>
         <ProductGrid products={bestSellingProducts.slice(0, 6)} />
+      </div>
+      {/* Newletter */}
+      <div className="w-full mt-24 flex flex-col py-32 relative overflow-hidden">
+        <Image
+          src={newsletterImage}
+          alt=""
+          fill
+          className="w-full object-cover"
+        />
+        <div className="gap-4 flex flex-col max-w-sm lg:max-w-lg mx-auto z-10">
+          <h2 className="text-3xl font-medium">
+            Signup for our newsletter to receive special offers, news, & events.
+          </h2>
+          <p className="text-sm uppercase font-mono">
+            Get 15% off on your first purchase
+          </p>
+          <form className="flex">
+            <Input className="border-black z-10 max-w-sm ring-offset-[#f0f1f3]" />
+            <Button>Subscribe</Button>
+          </form>
+        </div>
       </div>
     </main>
   );

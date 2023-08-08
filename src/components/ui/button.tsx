@@ -22,9 +22,9 @@ const buttonVariants = cva(
         icon: "hover:bg-accent hover:text-accent-foreground",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8  px-3 text-xs",
-        lg: "h-10  px-8",
+        default: "h-9 px-4 py-1.5 sm:py-2",
+        sm: "h-8 px-3 text-xs",
+        lg: "h-10 sm:h-12 px-8 ",
         icon: "h-9 w-9",
         raw: "",
       },
