@@ -303,7 +303,7 @@ const Slide = ({
         initial="hidden"
         animate="show"
         exit="exit"
-        className="container mx-auto sm:h-full z-50 pt-20 sm:py-36"
+        className="container mx-auto sm:h-full z-50 pt-20 sm:py-28"
       >
         <div className="max-w-sm lg:max-w-xl flex flex-col h-full lg:justify-center overflow-hidden">
           <motion.p
@@ -339,7 +339,7 @@ const Slide = ({
             href="/collections"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "text-md mr-auto mt-2 sm:mt-6 px-8 group"
+              "text-md mr-auto mt-2 sm:mt-6 px-8 group flex-shrink-0"
             )}
           >
             {cta.text}
