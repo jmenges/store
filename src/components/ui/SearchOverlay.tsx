@@ -29,12 +29,12 @@ const SearchOverlayContent = React.forwardRef<
       )}
       {...props}
     >
-      <div className="flex items-center h-full px-4">
+      <div className="flex items-center h-full max-sm:px-4 sm:pl-4">
         {children}
         <DialogPrimitive.Close
           className={cn(
-            buttonVariants({ variant: "icon", size: "sm" }),
-            "h-9 opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-secondary"
+            buttonVariants({ variant: "outline", size: "sm" }),
+            "h-9 opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-secondary ml-[1px]"
           )}
           onClick={onCloseClick}
         >
