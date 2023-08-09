@@ -1,5 +1,4 @@
 import ProductGrid from "@/components/ProductGrid/ProductGrid";
-import { ShopifyImage } from "@/components/ui/ShopifyImage";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { getCollections } from "@/lib/shopify/operations/collection";
 import { getProducts } from "@/lib/shopify/operations/product";
@@ -7,8 +6,8 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 
-import newsletterImage from "/public/landing/newsletter.webp";
 import image2 from "/public/landing/collection.jpeg";
+import newsletterImage from "/public/landing/newsletter.webp";
 
 import HeroSlider from "@/components/HeroSlider";
 import { Input } from "@/components/ui/input";
@@ -43,12 +42,12 @@ export default async function Home() {
                   className="group flex flex-col"
                   href={`/collections/`}
                 >
-                  <div className="overflow-hidden">
-                    <ShopifyImage
-                      src={collection?.image?.url}
-                      alt={collection?.image?.altText || collection.title}
-                      width={1000}
-                      height={1000}
+                  <div className="overflow-hidden bg-gray-500">
+                    <Image
+                      src={collection.image.url}
+                      alt={collection.image.altText}
+                      width={collection.image.width}
+                      height={collection.image.height}
                       className="scale-[103%] transition-all duration-500 hover:translate-x-1"
                     />
                   </div>
@@ -128,7 +127,7 @@ export default async function Home() {
 
         <div className="lg:mt-12 absolute space-y-4 lg:w-1/3 p-12 h-full overflow-clip">
           <h2 className="text-xl lg:text-3xl font-thin">
-            Explore Our Exclusive Spring Collection for Women, Designed by Tim 
+            Explore Our Exclusive Spring Collection for Women, Designed by Tim
             Freedman. Enjoy Complimentary Shipping on Orders Over €60.
           </h2>
           <Link
@@ -162,7 +161,10 @@ export default async function Home() {
             <ArrowRightIcon className="h-4 w-4 transition-all group-hover:translate-x-1" />
           </Link>
         </div>
-        <ProductGrid products={bestSellingProducts.slice(0, 6)} />
+        <ProductGrid
+          products={bestSellingProducts.slice(0, 6)}
+          imageSizes="(min-width: 1440px) 405px, (min-width: 1040px) 27.89vw, calc(50vw - 40px)"
+        />
       </div>
       {/* Newletter */}
       <div className="w-full mt-24 flex flex-col py-32 relative overflow-hidden">
