@@ -8,9 +8,13 @@ import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 
-type Props = { product: Product; imageSizes?: string };
+type Props = { product: Product; imageSizes?: string; priority?: boolean };
 
-export default function ProductGridItem({ product, imageSizes = "" }: Props) {
+export default function ProductGridItem({
+  product,
+  imageSizes = "",
+  priority = false,
+}: Props) {
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
   const isProductInWishlist = isInWishlist(product.id);
@@ -27,6 +31,7 @@ export default function ProductGridItem({ product, imageSizes = "" }: Props) {
           width={product.images[0].width}
           height={product.images[0].height}
           sizes={imageSizes}
+          priority={priority}
           className="scale-[103%] transition-all duration-500 hover:translate-x-1"
         />
         <div className="absolute bottom-4 left-4 transition-all origin-bottom-left opacity-0 group-hover:opacity-100 rotate-12 group-hover:rotate-0 translate-y-1/4 group-hover:translate-y-0 overflow-hidden duration-300">

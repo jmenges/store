@@ -96,7 +96,7 @@ export default async function Collection({
               </p>
               <ProductSorter className="ml-auto min-w-[200px] flex-shrink-0" />
             </div>
-            <ProductGrid className="pt-4" products={products} imageSizes="(min-width: 1440px) 285px, (min-width: 1040px) calc(21.05vw - 14px), (min-width: 780px) calc(37.5vw - 50px), calc(50vw - 40px)"/>
+            <ProductGrid className="pt-4" products={products} imageSizes="(min-width: 1440px) 285px, (min-width: 1040px) calc(21.05vw - 14px), (min-width: 780px) calc(37.5vw - 50px), calc(50vw - 40px)" priorityImagesCount={4}/>
           </div>
           <ProductFilter
             currencySymbol={shopCurrency.symbol}

@@ -18,6 +18,7 @@ export default function CollectionItem({ collection, active }: Props) {
         alt={collection.image.altText}
         width={collection.image.width}
         height={collection.image.height}
+        priority
         sizes="(min-width: 1360px) 192px, calc(13.71vw + 8px)"
         className="rounded-full w-[15vw] h-[15vw] max-h-48 max-w-[12rem]"
       />

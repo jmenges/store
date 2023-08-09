@@ -93,7 +93,7 @@ export default async function Products({
             className="pt-2"
             activeFilters={activeFilters}
           />
-          <ProductGrid className="pt-4" products={products} imageSizes="(min-width: 1440px) 285px, (min-width: 1040px) calc(21.05vw - 14px), (min-width: 780px) calc(37.5vw - 50px), calc(50vw - 40px)"/>
+          <ProductGrid className="pt-4" products={products} imageSizes="(min-width: 1440px) 285px, (min-width: 1040px) calc(21.05vw - 14px), (min-width: 780px) calc(37.5vw - 50px), calc(50vw - 40px)" priorityImagesCount={6}/>
         </div>
       </main>
     </div>
