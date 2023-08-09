@@ -29,9 +29,10 @@ export default function WishlistGridItem({
       >
         <Image
           src={product.images[0].url}
-          alt={product.images[0].altText || product.title}
-          width={1000}
-          height={1000}
+          alt={product.images[0].altText}
+          width={product.images[0].width}
+          height={product.images[0].height}
+          sizes="50vw"
           className="scale-[103%] transition-all duration-500 hover:translate-x-1"
         />
         <div className="absolute bottom-0 right-0">

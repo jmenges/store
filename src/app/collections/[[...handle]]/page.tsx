@@ -65,7 +65,7 @@ export default async function Collection({
         ]}
       />
       <div className="container mx-auto">
-        <div className="my-8 ml-8 max-sm:hidden">
+        <div className="my-8 lg:ml-8 max-sm:hidden">
           <CollectionItems
             activeHandle={collectionHandle}
             collections={collections}
@@ -96,7 +96,7 @@ export default async function Collection({
               </p>
               <ProductSorter className="ml-auto min-w-[200px] flex-shrink-0" />
             </div>
-            <ProductGrid className="pt-4" products={products} />
+            <ProductGrid className="pt-4" products={products} imageSizes="(min-width: 1440px) 285px, (min-width: 1040px) calc(21.05vw - 14px), (min-width: 780px) calc(37.5vw - 50px), calc(50vw - 40px)"/>
           </div>
           <ProductFilter
             currencySymbol={shopCurrency.symbol}
