@@ -3,9 +3,13 @@ import { cn } from "@/lib/utils";
 import { Product } from "@/types/shopify";
 import React from "react";
 
-type Props = { products: Product[]; className?: string };
+type Props = { products: Product[]; className?: string; imageSizes?: string };
 
-export default function ProductGrid({ products, className }: Props) {
+export default function ProductGrid({
+  products,
+  className,
+  imageSizes,
+}: Props) {
   return (
     <div
       className={cn(
@@ -14,7 +18,11 @@ export default function ProductGrid({ products, className }: Props) {
       )}
     >
       {products.map((product) => (
-        <ProductGridItem key={product.handle} product={product} />
+        <ProductGridItem
+          key={product.handle}
+          product={product}
+          imageSizes={imageSizes}
+        />
       ))}
     </div>
   );

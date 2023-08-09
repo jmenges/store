@@ -106,11 +106,14 @@ export default async function Product({
               />
             )}
             <Separator className="my-6" />
-            <AddToCartButton productTitle={product.title} variant={activeVariant} />
+            <AddToCartButton
+              productTitle={product.title}
+              variant={activeVariant}
+            />
           </div>
         </div>
         {/* Product Information */}
-        <Tabs defaultValue="description" className="mb-8 mt-24 w-full">
+        {/* <Tabs defaultValue="description" className="mb-8 mt-24 w-full">
           <TabsList className="space-x-8">
             <TabsTrigger value="description">Description</TabsTrigger>
             <TabsTrigger value="additional-information">
@@ -136,7 +139,7 @@ export default async function Product({
             }
           </TabsContent>
           <TabsContent value="reviews">Change your password here.</TabsContent>
-        </Tabs>
+        </Tabs> */}
         {/* Related Products */}
         <div>
           <h3 className="mb-8 mt-24 text-2xl font-semibold">
@@ -144,6 +147,7 @@ export default async function Product({
           </h3>
           <ProductGrid
             className="md:grid-cols-4 lg:grid-cols-4"
+            imageSizes="(min-width: 1440px) 292px, (min-width: 1040px) 21.05vw, (min-width: 780px) calc(25vw - 36px), calc(50vw - 40px)"
             products={productRecommendations.slice(0, 4)}
           />
         </div>

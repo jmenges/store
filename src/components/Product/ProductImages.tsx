@@ -34,11 +34,13 @@ function ProductImages({ images, className }: Props) {
       <div className="relative sm:ml-[25%] sm:w-3/4">
         {activeImageRef.current.width && activeImageRef.current.height ? (
           <Image
-            src={images[activeIndex].url}
+            src={activeImageRef.current.url}
             width={activeImageRef.current.width}
             height={activeImageRef.current.height}
+            sizes="(min-width: 1440px) 583px, (min-width: 780px) 41.56vw, (min-width: 640px) calc(75vw - 36px), calc(100vw - 48px)"
             alt={images[activeIndex].altText || ""}
             className="object-contain"
+            priority
           />
         ) : null}
         <Button
@@ -77,6 +79,7 @@ function ProductImages({ images, className }: Props) {
                 src={image.url}
                 width={image.width}
                 height={image.height}
+                sizes="(min-width: 1420px) 158px, (min-width: 780px) calc(14.19vw - 41px), (min-width: 640px) calc(25vw - 48px), calc(25vw - 16px)"
                 alt={image.altText || ""}
                 className="object-contain"
               />
