@@ -34,26 +34,22 @@ export default async function Search({
     filterQueryKeys.includes(param[0])
   );
 
-  const query = buildQueryFromQueryParms(activeFilters) + " AND "  + searchQuery
+  const query = buildQueryFromQueryParms(activeFilters) + " AND " + searchQuery;
 
   const productsData = getProducts({
-    query: query, 
+    query: query,
     sortKey: validSortOption?.sortKey,
     reverse: validSortOption?.reverse,
   });
-
   const productCountsData = getProductCount();
-
   const shopCurrencyData = getShopCurrency();
-  const collectionsData = getCollections({});
   const productTypesData = getProductTypes();
 
-  const [products, productCounts, productTypes, collections, shopCurrency] =
+  const [products, productCounts, productTypes, shopCurrency] =
     await Promise.all([
       productsData,
       productCountsData,
       productTypesData,
-      collectionsData,
       shopCurrencyData,
     ]);
 
@@ -101,7 +97,11 @@ export default async function Search({
             className="pt-2"
             activeFilters={activeFilters}
           />
-          <ProductGrid className="pt-4" products={products} />
+          <ProductGrid
+            className="pt-4"
+            products={products}
+            imageSizes="(min-width: 1440px) 285px, (min-width: 1040px) calc(21.05vw - 14px), (min-width: 780px) calc(37.5vw - 50px), calc(50vw - 40px)"
+          />
         </div>
       </main>
     </div>
