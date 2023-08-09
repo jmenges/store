@@ -76,6 +76,7 @@ function ProductImages({ images, className }: Props) {
               sizes="(min-width: 1420px) 158px, (min-width: 780px) calc(14.19vw - 41px), (min-width: 640px) calc(25vw - 48px), calc(25vw - 16px)"
               alt={image.altText}
               className="object-contain"
+              priority
             />
           </button>
         ))}
