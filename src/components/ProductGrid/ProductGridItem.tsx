@@ -23,9 +23,9 @@ export default function ProductGridItem({ product, imageSizes = "" }: Props) {
       >
         <Image
           src={product.images[0].url}
-          alt={product.images[0].altText || product.title}
-          width={product.images[0].width || 1}
-          height={product.images[0].height || 1}
+          alt={product.images[0].altText}
+          width={product.images[0].width}
+          height={product.images[0].height}
           sizes={imageSizes}
           className="scale-[103%] transition-all duration-500 hover:translate-x-1"
         />

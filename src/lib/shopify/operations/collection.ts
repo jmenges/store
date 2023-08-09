@@ -15,6 +15,7 @@ import {
   Product,
   ProductFilter,
   ShopifyCollection,
+  ShopifyImage,
 } from "@/types/shopify";
 
 const reshapeCollections = (collections: ShopifyCollection[]) => {
@@ -32,11 +33,28 @@ const reshapeCollections = (collections: ShopifyCollection[]) => {
   return reshapedCollections;
 };
 
+const reshapeImage = (image: ShopifyImage, collectionTitle: string) => {
+  const filename = image.url.match(/.*\/(.*)\..*/)?.[1] || 0;
+  if (!image?.width || !image?.height) {
+    throw new Error("We espect all images to have width and height defined");
+  }
+
+  return {
+    ...image,
+    altText: image.altText || `${collectionTitle} - ${filename}`,
+    width: image.width || 1,
+    height: image.height || 1,
+  };
+};
+
 const reshapeCollection = (collection: ShopifyCollection) => {
-  const { products, ...rest } = collection;
+  const { products, image, ...rest } = collection;
+
+  if (!image) throw new Error("Missing clollection image");
 
   return {
     ...rest,
+    image: reshapeImage(image, collection.title), 
     productCount: products.edges.length,
   };
 };

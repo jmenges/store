@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useRef } from "react";
-import Image from "next/image";
-import { Image as ImageType } from "@/types/shopify";
 import DraggableScrollSection from "@/components/DraggableScrollSection";
 import { cn } from "@/lib/utils";
+import { Image as ImageType } from "@/types/shopify";
+import Image from "next/image";
+import React from "react";
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import HeroIcon from "@/components/ui/HeroIcon";
 import { Button } from "@/components/ui/button";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   images: ImageType[];
@@ -17,9 +17,6 @@ type Props = {
 
 function ProductImages({ images, className }: Props) {
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
-  const activeImageRef = useRef<ImageType>(images[0]);
-
-  activeImageRef.current = images[activeIndex];
 
   const nextImage = () => {
     setActiveIndex((prev) => (prev + 1) % images.length);
@@ -32,17 +29,15 @@ function ProductImages({ images, className }: Props) {
   return (
     <div className={cn("relative", className)}>
       <div className="relative sm:ml-[25%] sm:w-3/4">
-        {activeImageRef.current.width && activeImageRef.current.height ? (
-          <Image
-            src={activeImageRef.current.url}
-            width={activeImageRef.current.width}
-            height={activeImageRef.current.height}
-            sizes="(min-width: 1440px) 583px, (min-width: 780px) 41.56vw, (min-width: 640px) calc(75vw - 36px), calc(100vw - 48px)"
-            alt={images[activeIndex].altText || ""}
-            className="object-contain"
-            priority
-          />
-        ) : null}
+        <Image
+          src={images[activeIndex].url}
+          width={images[activeIndex].width}
+          height={images[activeIndex].height}
+          sizes="(min-width: 1440px) 583px, (min-width: 780px) 41.56vw, (min-width: 640px) calc(75vw - 36px), calc(100vw - 48px)"
+          alt={images[activeIndex].altText}
+          className="object-contain"
+          priority
+        />
         <Button
           className="absolute left-2 top-1/2"
           variant="outline"
@@ -71,19 +66,17 @@ function ProductImages({ images, className }: Props) {
               "flex flex-shrink-0 transition-all max-sm:w-1/4",
               index === activeIndex ? "border-2 border-gray-300" : ""
             )}
-            key={image.url}
+            key={image.id}
             onClick={() => setActiveIndex(index)}
           >
-            {image.width && image.height ? (
-              <Image
-                src={image.url}
-                width={image.width}
-                height={image.height}
-                sizes="(min-width: 1420px) 158px, (min-width: 780px) calc(14.19vw - 41px), (min-width: 640px) calc(25vw - 48px), calc(25vw - 16px)"
-                alt={image.altText || ""}
-                className="object-contain"
-              />
-            ) : null}
+            <Image
+              src={image.url}
+              width={image.width}
+              height={image.height}
+              sizes="(min-width: 1420px) 158px, (min-width: 780px) calc(14.19vw - 41px), (min-width: 640px) calc(25vw - 48px), calc(25vw - 16px)"
+              alt={image.altText}
+              className="object-contain"
+            />
           </button>
         ))}
       </DraggableScrollSection>

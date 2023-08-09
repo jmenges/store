@@ -17,13 +17,41 @@ import {
   GetProductsByIdsOperation,
   GetProductsOperation,
 } from "@/types/operations";
-import { Product, ShopifyProduct } from "@/types/shopify";
+import {
+  Connection,
+  Product,
+  Image,
+  ShopifyImage,
+  ShopifyProduct,
+} from "@/types/shopify";
 
 const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
 
 /*
  * Shared functions
  */
+
+
+
+const reshapeImages = (
+  images: Connection<ShopifyImage>,
+  productTitle: string
+): Image[] => {
+  const flattened = removeEdgesAndNodes(images);
+
+  return flattened.map((image: ShopifyImage, index) => {
+    const filename = image.url.match(/.*\/(.*)\..*/)?.[1] || index;
+    if (!image?.width || !image?.height) {
+      throw new Error("We espect all images to have width and height defined");
+    }
+    return {
+      ...image,
+      altText: image.altText || `${productTitle} - ${filename}`,
+      width: image.width || 1,
+      height: image.height || 1,
+    };
+  });
+};
 
 const reshapeProduct = (
   product: ShopifyProduct,
@@ -40,7 +68,7 @@ const reshapeProduct = (
 
   return {
     ...rest,
-    images: removeEdgesAndNodes(images),
+    images: reshapeImages(images, product.title),
     variants: removeEdgesAndNodes(variants),
   };
 };

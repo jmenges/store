@@ -10,7 +10,7 @@ import {
   CurrencyCode,
 } from "@shopify/hydrogen-react/storefront-api-types";
 
-export type { ProductFilter };
+export type { ProductFilter, ShopifyImage };
 
 export type Maybe<T> = T | null;
 
@@ -27,10 +27,12 @@ export type ProductVariant = Pick<
   "id" | "title" | "availableForSale" | "selectedOptions" | "price"
 >;
 
-export type Image = Pick<
-  ShopifyImage,
-  "id" | "height" | "width" | "url" | "altText"
->;
+export type Image = Pick<ShopifyImage, "id"> & {
+  url: string;
+  altText: string;
+  width: number;
+  height: number;
+};
 
 export type ShopifyProduct = Pick<
   StorefrontProduct,
@@ -52,12 +54,13 @@ export type ShopifyProduct = Pick<
 
 export type ShopifyCollection = Pick<
   StorefrontCollection,
-  "id" | "handle" | "title" | "image" | "products"
+  "id" | "handle" | "title" | "products" | "image"
 >;
 
-export type Collection = Omit<ShopifyCollection, "products"> & {
+export type Collection = Omit<ShopifyCollection, "products" | "image"> & {
   products?: Product[];
   productCount: number;
+  image: Image;
 };
 
 export type Product = Omit<ShopifyProduct, "images" | "variants"> & {
