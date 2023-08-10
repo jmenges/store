@@ -120,8 +120,8 @@ export default async function Home() {
       <div className="flex w-full relative">
         <Image
           src={image2}
-          height={700}
           className="object-cover w-full max-h-[600px]"
+          sizes="100vw"
           alt={""}
         />
 
