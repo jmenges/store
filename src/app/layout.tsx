@@ -34,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps) {
       >
         <CartProvider>
           <Header />
-          <div className="min-h-screen">{children}</div>
+          <div className="min-h-screen z-10 relative">{children}</div>
           <Footer />
         </CartProvider>
       </body>

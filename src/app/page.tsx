@@ -48,10 +48,10 @@ export default async function Home() {
                       alt={collection.image.altText}
                       width={collection.image.width}
                       height={collection.image.height}
+                      sizes="(min-width: 1440px) 421px, calc(31.52vw - 27px)"
                       className="scale-[103%] transition-all duration-500 hover:translate-x-1"
                     />
                   </div>
-
                   <div className="mt-4 flex justify-center text-center">
                     <p className="animate-underline group-hover:animate-underline text-2xl ">
                       {collection.title}
@@ -116,7 +116,7 @@ export default async function Home() {
           </Link>
         </div>
       </div>
-      {/* Sustainable Vales */}
+      {/* Spring Collection */}
       <div className="flex w-full relative">
         <Image
           src={image2}
@@ -166,12 +166,14 @@ export default async function Home() {
           imageSizes="(min-width: 1440px) 405px, (min-width: 1040px) 27.89vw, calc(50vw - 40px)"
         />
       </div>
+
       {/* Newletter */}
       <div className="w-full mt-24 flex flex-col py-32 relative overflow-hidden">
         <Image
           src={newsletterImage}
           alt=""
           fill
+          sizes="100vw"
           className="w-full object-cover"
         />
         <div className="gap-4 flex flex-col max-w-sm lg:max-w-lg mx-auto z-10">
