@@ -8,6 +8,7 @@ import {
   Cart as StorefrontCart,
   CartLine as StorefrontCartLine,
   CurrencyCode,
+  Merchandise as StorefrontMerchandise,
 } from "@shopify/hydrogen-react/storefront-api-types";
 
 export type { ProductFilter, ShopifyImage };
@@ -89,10 +90,23 @@ export type ShopifyCart = Pick<
   "id" | "checkoutUrl" | "cost" | "lines" | "totalQuantity"
 >;
 
-export type CartItem = Pick<
+export type ShopifyMerchandise = Pick<
+  StorefrontMerchandise,
+  "id" | "title" | "image" | "selectedOptions" | "product"
+>;
+
+export type Merchandise = Omit<ShopifyMerchandise, "image"> & {
+  image: Image;
+};
+
+export type ShoifyCartItem = Pick<
   StorefrontCartLine,
   "id" | "quantity" | "cost" | "merchandise"
 >;
+
+export type CartItem = Omit<ShoifyCartItem, "merchandise"> & {
+  merchandise: Merchandise;
+};
 
 export type Cart = Omit<ShopifyCart, "lines"> & {
   lines: CartItem[];

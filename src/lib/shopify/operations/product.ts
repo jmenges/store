@@ -8,7 +8,7 @@ import {
   getProductsByIdsQuery,
   getProductsQuery,
 } from "@/lib/shopify/queries/product";
-import { removeEdgesAndNodes } from "@/lib/shopify/utils";
+import { removeEdgesAndNodes, reshapeImages } from "@/lib/shopify/utils";
 import {
   GetProductNodesOperation,
   GetProductOperation,
@@ -18,11 +18,8 @@ import {
   GetProductsOperation,
 } from "@/types/operations";
 import {
-  Connection,
   Product,
-  Image,
-  ShopifyImage,
-  ShopifyProduct,
+  ShopifyProduct
 } from "@/types/shopify";
 
 const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
@@ -30,28 +27,6 @@ const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
 /*
  * Shared functions
  */
-
-
-
-const reshapeImages = (
-  images: Connection<ShopifyImage>,
-  productTitle: string
-): Image[] => {
-  const flattened = removeEdgesAndNodes(images);
-
-  return flattened.map((image: ShopifyImage, index) => {
-    const filename = image.url.match(/.*\/(.*)\..*/)?.[1] || index;
-    if (!image?.width || !image?.height) {
-      throw new Error("We espect all images to have width and height defined");
-    }
-    return {
-      ...image,
-      altText: image.altText || `${productTitle} - ${filename}`,
-      width: image.width || 1,
-      height: image.height || 1,
-    };
-  });
-};
 
 const reshapeProduct = (
   product: ShopifyProduct,

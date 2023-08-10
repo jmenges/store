@@ -5,7 +5,7 @@ import {
   getCollectionProductsQuery,
   getCollectionsQuery,
 } from "@/lib/shopify/queries/collection";
-import { removeEdgesAndNodes } from "@/lib/shopify/utils";
+import { removeEdgesAndNodes, reshapeImage } from "@/lib/shopify/utils";
 import {
   GetCollectionProductsOperation,
   GetCollectionsOperation,
@@ -14,8 +14,7 @@ import {
   Collection,
   Product,
   ProductFilter,
-  ShopifyCollection,
-  ShopifyImage,
+  ShopifyCollection
 } from "@/types/shopify";
 
 const reshapeCollections = (collections: ShopifyCollection[]) => {
@@ -33,20 +32,6 @@ const reshapeCollections = (collections: ShopifyCollection[]) => {
   return reshapedCollections;
 };
 
-const reshapeImage = (image: ShopifyImage, collectionTitle: string) => {
-  const filename = image.url.match(/.*\/(.*)\..*/)?.[1] || 0;
-  if (!image?.width || !image?.height) {
-    throw new Error("We espect all images to have width and height defined");
-  }
-
-  return {
-    ...image,
-    altText: image.altText || `${collectionTitle} - ${filename}`,
-    width: image.width || 1,
-    height: image.height || 1,
-  };
-};
-
 const reshapeCollection = (collection: ShopifyCollection) => {
   const { products, image, ...rest } = collection;
 
@@ -54,7 +39,7 @@ const reshapeCollection = (collection: ShopifyCollection) => {
 
   return {
     ...rest,
-    image: reshapeImage(image, collection.title), 
+    image: reshapeImage(image, collection.title),
     productCount: products.edges.length,
   };
 };
