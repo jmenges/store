@@ -2,7 +2,6 @@
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Image as ImageType } from "@/types/shopify";
 import {
   ArrowLongLeftIcon,
   ArrowLongRightIcon,
@@ -48,7 +47,7 @@ const slides: Slide[] = [
       url: "/landing/hero.png",
       altText: "",
       width: 600,
-      height: 1000,
+      height: 788,
     },
     cta: {
       href: "",
@@ -297,7 +296,13 @@ const Slide = ({
   }, []);
 
   return (
-    <section className={cn("absolute max-sm:flex max-sm:flex-col max-sm:relative w-full h-full", className)} key={id}>
+    <section
+      className={cn(
+        "absolute max-sm:flex max-sm:flex-col max-sm:relative w-full h-full",
+        className
+      )}
+      key={id}
+    >
       <motion.div
         variants={animationVariants.container}
         initial="hidden"
@@ -347,28 +352,27 @@ const Slide = ({
           </MotionLink>
         </div>
       </motion.div>
-      <div className="max-sm:flex sm:absolute w-full sm:h-full sm:top-0 sm:left-0 pointer-events-none">
-        <div className="sm:ml-[50%] sm:h-full max-sm:pt-4 relative flex max-sm:items-start justify-center items-end">
+      <div className="max-sm:flex-1 sm:absolute w-full sm:h-full sm:top-0 sm:left-0 pointer-events-none">
+        <div className="sm:ml-[50%] h-full max-sm:pt-4 relative flex max-sm:items-start justify-center items-end">
           <motion.div
             variants={animationVariants.imageBg}
             initial="hidden"
             animate="show"
             exit={"exit"}
-            className="absolute -z-10 ml-[5%] sm:top-[10%] sm:h-[100vh] min-h-[600px] min-w-[600px] sm:w-[100vh] rounded-[100%] bg-[#c5d3dd] md:top-[25%] max-w-[1000px] max-h-[1000px]"
+            className="absolute -z-10 ml-[5%] sm:h-[100vh] min-h-[600px] min-w-[600px] sm:w-[100vh] rounded-[100%] bg-[#c5d3dd] sm:top-[25%] max-w-[1000px] max-h-[1000px]"
           ></motion.div>
-          <div className="z-10 max-h-[90%] max-sm:ml-[10vw] overflow-clip flex">
-            <MotionImage
-              className="object-contain max-sm:max-h-[600px]"
-              variants={animationVariants.image}
-              initial="hidden"
-              animate="show"
-              exit={["exitFade", "exitTranslate"]}
-              src={image.url}
-              height={image.height}
-              width={image.width}
-              alt="hero"
-            />
-          </div>
+          <MotionImage
+            className="max-sm:max-h-[600px] max-sm:mt-4 max-sm:ml-8 object-contain sm:object-bottom max-h-[90%] sm:!top-auto sm:bottom"
+            variants={animationVariants.image}
+            initial="hidden"
+            animate="show"
+            exit={["exitFade", "exitTranslate"]}
+            priority={id === "1"}
+            src={image.url}
+            sizes="(min-width: 640px) 50vw, calc(100vw - 64px)"
+            fill
+            alt="hero"
+          />
         </div>
       </div>
     </section>
