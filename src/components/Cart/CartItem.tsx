@@ -37,12 +37,12 @@ export default function CartItem({ item }: Props) {
   return (
     <div
       className={cn(
-        "flex gap-2 px-4 py-2",
+        "flex gap-2 px-4 py-2 relative",
         isPending ? "bg-disabled-animate" : ""
       )}
     >
       <Image
-        className="rounded-sm"
+        className="rounded-sm w-1/3"
         height={item.merchandise.image.height}
         width={item.merchandise.image.width}
         src={item.merchandise.image.url}
@@ -65,7 +65,7 @@ export default function CartItem({ item }: Props) {
             variant="ghost"
             disabled={isPending}
           >
-            <SolarTrashBin2Linear className="svg-stroke-2 h-4 w-4 stroke-current text-black" />
+            <SolarTrashBin2Linear className="svg-stroke-2 mt-1 h-4 w-4 stroke-current text-black" />
           </Button>
         </div>
         {/* Quantity & Price */}
