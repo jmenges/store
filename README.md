@@ -1,6 +1,6 @@
 Portfilio Project - Headless Ecommerce Store with Shopify
 
-Deployed at: [https://store-kappa-bice.vercel.app/]()
+Deployed at: [https://store-kappa-bice.vercel.app/](https://store-kappa-bice.vercel.app/)
 
 ##### **Details**
 
@@ -27,7 +27,7 @@ Deployed at: [https://store-kappa-bice.vercel.app/]()
 
 * Improve layout
 * Better animations (Page transitions, content loading)
-* Optimize image loading
+* Optimize image loading with blurred placeholders
 
 ## Credits
 
