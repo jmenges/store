@@ -82,10 +82,10 @@ export default function Footer({}: Props) {
         <Separator className="mt-12 mb-8 bg-gray-400" />
         {/* <hr className="mt-12 mb-6" /> */}
         <div className="flex flex-wrap gap-y-2 items-center justify-center font-light md:justify-between">
-          <div className="mx-auto text-sm w-full flex gap-4 md:w-6/12">
+          <div className="mx-auto text-sm w-full flex gap-4 md:w-6/12 px-4">
             <span className="">Copyright 2023 © Jonas Menges</span>
           </div>
-          <div className="w-full md:w-1/2 ">
+          <div className="w-full md:w-1/2 px-4">
             <span className="font-semibold md:inline-flex md:gap-4 items-center">
               Portfolio Project: STORE <br />
               <Link
