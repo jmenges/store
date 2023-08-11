@@ -43,7 +43,8 @@ export default function ProductGridItem({
               }}
               size="icon"
             >
-              <HeartIcon />
+              <HeartIcon aria-hidden/>
+              <span className="sr-only">Add product to wishlist</span>
             </Button>
           ) : (
             <Button
@@ -53,7 +54,8 @@ export default function ProductGridItem({
               }}
               size="icon"
             >
-              <HeartFilledIcon className="text-red-500" />
+              <HeartFilledIcon className="text-red-500" aria-hidden/>
+              <span className="sr-only">Remove product from wishlist</span>
             </Button>
           )}
         </div>

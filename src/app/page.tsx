@@ -30,7 +30,7 @@ export default async function Home() {
             <span className="mr-2 h-[1px] w-6 bg-black"></span>
             <span className="text-sm uppercase">The essentials</span>
           </div>
-          <h3 className="text-3xl">Shop by Collections </h3>
+          <h1 className="text-3xl">Shop by Collections </h1>
         </div>
         <div className="mt-12 container mx-auto grid grid-cols-3 gap-6">
           {collections
@@ -41,6 +41,7 @@ export default async function Home() {
                   key={collection.id}
                   className="group flex flex-col"
                   href={`/collections/`}
+                  aria-label={`View collection ${collection.title}`}
                 >
                   <div className="overflow-hidden bg-gray-500">
                     <Image
@@ -66,7 +67,7 @@ export default async function Home() {
       <div className="container mt-18 mb-24">
         <div className="relative mb-2 inline-flex items-center">
           <span className="mr-2 h-[1px] w-6 bg-black"></span>
-          <span className="text-sm uppercase">Our partners</span>
+          <h1 className="text-sm uppercase">Our partners</h1>
         </div>
         <div className="flex justify-between gap-4 border-y border-gray-300 py-8 ">
           <Link href="#">
@@ -126,10 +127,10 @@ export default async function Home() {
         />
 
         <div className="lg:mt-12 absolute space-y-4 lg:w-1/3 p-12 h-full overflow-clip">
-          <h2 className="text-xl lg:text-3xl font-thin">
+          <h1 className="text-xl lg:text-3xl font-thin">
             Explore Our Exclusive Spring Collection for Women, Designed by Tim
             Freedman. Enjoy Complimentary Shipping on Orders Over €60.
-          </h2>
+          </h1>
           <Link
             href="/collections/women/"
             className={cn(
@@ -151,7 +152,7 @@ export default async function Home() {
               <span className="mr-2 h-[1px] w-6 bg-black"></span>
               <span className="text-sm uppercase">New Arrivals</span>
             </div>
-            <h3 className="text-3xl">Popular Products</h3>
+            <h1 className="text-3xl">Popular Products</h1>
           </div>
           <Link
             href="/products/"
@@ -177,14 +178,18 @@ export default async function Home() {
           className="w-full object-cover"
         />
         <div className="gap-4 flex flex-col max-w-sm lg:max-w-lg mx-auto z-10">
-          <h2 className="text-3xl font-medium">
+          <h1 className="text-3xl font-medium">
             Signup for our newsletter to receive special offers, news, & events.
-          </h2>
+          </h1>
           <p className="text-sm uppercase font-mono">
             Get 15% off on your first purchase
           </p>
           <form className="flex" action="/not-implemented">
-            <Input className="border-black z-10 max-w-sm ring-offset-[#f0f1f3]" />
+            <label htmlFor="newsletter-landing" className="sr-only">Email address</label>
+            <Input
+              id="newsletter-landing"
+              className="border-black z-10 max-w-sm ring-offset-[#f0f1f3]"
+            />
             <Button>Subscribe</Button>
           </form>
         </div>

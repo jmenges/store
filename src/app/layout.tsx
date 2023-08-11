@@ -28,7 +28,7 @@ type LayoutProps = {
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html>
+    <html lang="en">
       <body
         className={`${notoMono.variable} ${roboto.variable} bg-white font-sans text-black antialiased`}
       >

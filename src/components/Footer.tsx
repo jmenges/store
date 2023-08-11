@@ -18,10 +18,10 @@ export default function Footer({}: Props) {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap gap-y-4 text-left lg:text-left">
           <div className="w-full px-4 lg:w-3/12 ">
-            <h4 className="text-mono text-3xl font-bold">ST0RE</h4>
-            <h5 className="mb-2 mt-2 text-sm font-light">
+            <h1 className="text-mono text-3xl font-bold">ST0RE</h1>
+            <h2 className="mb-2 mt-2 text-sm font-light">
               Find us on any of these platforms, we respond 1-2 business days.
-            </h5>
+            </h2>
           </div>
           <div className="w-full px-4 lg:w-6/12">
             <div className="items-top flex flex-wrap">
@@ -63,18 +63,22 @@ export default function Footer({}: Props) {
                 variant="icon"
                 size="raw"
               >
-                <ArrowRightIcon className="h-4 w-4" />
+                <ArrowRightIcon className="h-4 w-4" aria-hidden />
+                <span className="sr-only">Subscribe to newsletter</span>
               </Button>
             </form>
             <div className="mt-4 flex gap-2">
               <Link href="/">
-                <TypcnSocialFacebook />
+                <span className="sr-only">Visit Facebook page</span>
+                <TypcnSocialFacebook aria-hidden />
+              </Link>
+              <Link href="/" >
+                <span className="sr-only">Visit Instagram page</span>
+                <TypcnSocialInstagram aria-hidden />
               </Link>
               <Link href="/">
-                <TypcnSocialInstagram />
-              </Link>
-              <Link href="/">
-                <TypcnSocialTwitter />
+                <span className="sr-only">Visit Twitter page</span>
+                <TypcnSocialTwitter aria-hidden />
               </Link>
             </div>
           </div>

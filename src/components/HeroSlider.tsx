@@ -256,16 +256,18 @@ export default function HeroSlider({ className }: Props) {
         className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-50 max-sm:bg-transparent max-sm:border-none max-sm:shadow-none"
         onClick={() => prevSlide()}
       >
-        <ArrowLeftIcon className="h-5 w-5 sm:hidden" />
-        <ArrowLongLeftIcon className="w-7 h-7 max-sm:hidden" />
+        <span className="sr-only">Last slide</span>
+        <ArrowLeftIcon className="h-5 w-5 sm:hidden" aria-hidden/>
+        <ArrowLongLeftIcon className="w-7 h-7 max-sm:hidden" aria-hidden/>
       </Button>
       <Button
         variant="outline"
         className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-50  max-sm:bg-transparent max-sm:border-none max-sm:shadow-none"
         onClick={() => nextSlide()}
       >
-        <ArrowRightIcon className="h-5 w-5 sm:hidden" />
-        <ArrowLongRightIcon className="w-7 h-7 max-sm:hidden" />
+        <span className="sr-only">Next slide</span>
+        <ArrowRightIcon className="h-5 w-5 sm:hidden" aria-hidden/>
+        <ArrowLongRightIcon className="w-7 h-7 max-sm:hidden" aria-hidden/>
       </Button>
       <AnimatePresence>
         <Slide
@@ -318,7 +320,7 @@ const Slide = ({
           >
             {prefix}
           </motion.p>
-          <h2
+          <h1
             key="h2"
             className="mb-2 sm:mb-4 text-3xl sm:text-6xl  font-semibold lg:text-8xl"
           >
@@ -331,7 +333,7 @@ const Slide = ({
                 {titleLine}
               </motion.span>
             ))}
-          </h2>
+          </h1>
           <motion.p
             key="p2"
             variants={animationVariants.containerChildren}
