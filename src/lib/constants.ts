@@ -70,17 +70,17 @@ export const footerNav: Menu[] = [
   {
     title: "Company",
     items: [
-      { title: "About Us", href: "/" },
-      { title: "Contact", href: "/" },
-      { title: "FAQs", href: "/" },
+      { title: "About Us", href: "/not-implemented" },
+      { title: "Contact", href: "/not-implemented" },
+      { title: "FAQs", href: "/not-implemented" },
     ],
   },
   {
     title: "Shopping",
     items: [
-      { title: "Terms & Conditions", href: "/" },
-      { title: "Privacy Policy", href: "/" },
-      { title: "Shipping", href: "/" },
+      { title: "Terms & Conditions", href: "/not-implemented" },
+      { title: "Privacy Policy", href: "/not-implemented" },
+      { title: "Shipping", href: "/not-implemented" },
     ],
   },
 ];

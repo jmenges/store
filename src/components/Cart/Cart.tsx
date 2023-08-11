@@ -76,13 +76,15 @@ export default function Cart({ cart, cartIdUpdated, className }: Props) {
           </div>
           <div className="mb-4 flex gap-2 px-4 [&>*]:flex-1">
             <Link
-              href="/cart"
+              onClick={toggleCart}
+              href="/not-implemented"
               className={buttonVariants({ variant: "outline" })}
             >
               View Cart
             </Link>
             <Link
-              href={cart.checkoutUrl}
+              onClick={toggleCart}
+              href={"/not-implemented"}
               className={buttonVariants({ variant: "default" })}
             >
               Checkout

@@ -183,7 +183,7 @@ export default async function Home() {
           <p className="text-sm uppercase font-mono">
             Get 15% off on your first purchase
           </p>
-          <form className="flex">
+          <form className="flex" action="/not-implemented">
             <Input className="border-black z-10 max-w-sm ring-offset-[#f0f1f3]" />
             <Button>Subscribe</Button>
           </form>

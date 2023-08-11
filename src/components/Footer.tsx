@@ -52,7 +52,7 @@ export default function Footer({}: Props) {
             <span className="text-md font-semibold">
               Subscribe for newsletter
             </span>
-            <div className="relative flex">
+            <form className="relative flex" action="/not-implemented">
               <Input
                 className="mt-2 text-white"
                 variant="underline"
@@ -65,7 +65,7 @@ export default function Footer({}: Props) {
               >
                 <ArrowRightIcon className="h-4 w-4" />
               </Button>
-            </div>
+            </form>
             <div className="mt-4 flex gap-2">
               <Link href="/">
                 <TypcnSocialFacebook />
