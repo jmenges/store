@@ -38,9 +38,10 @@ export default function Cart({ cart, cartIdUpdated, className }: Props) {
           "pl-2 pr-1",
           className
         )}
+        aria-label="Open cart dialog"
       >
-        <SolarCartLargeMinimalisticOutline className="h-4 w-4 stroke-current stroke-[0.5px]" />
-        <span className="-mt-2 ml-0.5 text-xs ">{cart.totalQuantity}</span>
+        <SolarCartLargeMinimalisticOutline className="h-4 w-4 stroke-current stroke-[0.5px]" aria-hidden/>
+        <span className="-mt-2 ml-0.5 text-xs" aria-hidden>{cart.totalQuantity}</span>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>

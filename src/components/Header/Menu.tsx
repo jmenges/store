@@ -16,9 +16,10 @@ export default function Menu({ className }: Props) {
           src="/StoreLogo.svg"
           width={100}
           height={40}
-          alt="logo"
+          alt=""
           className=""
         />
+          <span className="sr-only">Home</span>
       </Link>
       <Link className="font-medium" href="/collections">
         Collections

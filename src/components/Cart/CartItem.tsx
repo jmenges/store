@@ -53,9 +53,11 @@ export default function CartItem({ item }: Props) {
         <div className="flex flex-1 items-start justify-between">
           <div className="flex flex-col">
             <p className="font-bold text-black">
+              <span className="sr-only">Product title</span>
               {item.merchandise.product.title}
             </p>
             <p className="text-xs text-gray-500">
+              <span className="sr-only">Variant options</span>
               {item.merchandise.title.replace("/", "•")}
             </p>
           </div>
@@ -65,7 +67,8 @@ export default function CartItem({ item }: Props) {
             variant="ghost"
             disabled={isPending}
           >
-            <SolarTrashBin2Linear className="svg-stroke-2 mt-1 h-4 w-4 stroke-current text-black" />
+            <SolarTrashBin2Linear className="svg-stroke-2 mt-1 h-4 w-4 stroke-current text-black" aria-hidden/>
+            <span className="sr-only">Remove item</span>
           </Button>
         </div>
         {/* Quantity & Price */}
@@ -78,6 +81,7 @@ export default function CartItem({ item }: Props) {
             onValueChange={onUpdateQuanity}
           />
           <Price
+            ariaAlt="Item price"
             amount={item.cost.totalAmount.amount}
             currencyCode={item.cost.totalAmount.currencyCode}
           />

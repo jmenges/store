@@ -87,12 +87,14 @@ export default function NumberStepper({
         size="icon"
         disabled={disabled}
       >
-        <HeroIcon>
+        <HeroIcon ariaAlt='Decrement quantity'>
           <MinusIcon className={cn(iconVariants({ size }))} />
         </HeroIcon>
       </Button>
+      <label className='sr-only' htmlFor='quantity'>Quantity</label>
       <Input
         disabled={disabled}
+        id="quantity"
         type="number"
         className={cn(
           'rounded-l-none rounded-r-none border-x-0 text-center focus:z-10',
@@ -108,7 +110,7 @@ export default function NumberStepper({
         size="icon"
         disabled={disabled}
       >
-        <HeroIcon>
+        <HeroIcon ariaAlt='Increment quantity'>
           <PlusIcon className={cn(iconVariants({ size }))} />
         </HeroIcon>
       </Button>

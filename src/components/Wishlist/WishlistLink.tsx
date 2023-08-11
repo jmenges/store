@@ -20,10 +20,10 @@ export default function WishlistLink({ className }: Props) {
         "pl-2 pr-1"
       )}
     >
-      <HeroIcon>
+      <HeroIcon ariaAlt="Navigate to wishlist">
         <HeartIcon className="w-4 h-4 text-black" />
       </HeroIcon>
-      <span className="-mt-2 ml-0.5 text-xs ">{wishlistCount}</span>
+      <span className="-mt-2 ml-0.5 text-xs" aria-hidden>{wishlistCount}</span>
     </Link>
   );
 }

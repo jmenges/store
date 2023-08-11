@@ -106,8 +106,10 @@ export default function SearchBar({ className }: Props) {
         )}
         onClick={showSearchBar}
       >
-        <HeroIcon><MagnifyingGlassIcon className="w-4 h-4" /></HeroIcon>
-      </SearchOverlayTrigger>
+        <HeroIcon ariaAlt="Search">
+          <MagnifyingGlassIcon className="w-4 h-4" />
+        </HeroIcon>
+       </SearchOverlayTrigger>
       <SearchOverlayContent
         onOpenAutoFocus={(e) => {
           e.preventDefault();
@@ -119,9 +121,11 @@ export default function SearchBar({ className }: Props) {
         <div className="flex flex-1 relative">
           <form action="/search" className="w-full" ref={formRef}>
             <div className="relative">
+              <label htmlFor="search" className="sr-only">Search: </label>
               <Input
                 autoFocus={false}
                 name="term"
+                id="search"
                 required
                 onChange={() => {
                   handleInputChange();
@@ -153,6 +157,7 @@ export default function SearchBar({ className }: Props) {
                     onClick={() => {
                       handleSearchResultClick(product.handle);
                     }}
+                    aria-label={`Navigate to ${product.title}`}
                     key={product.id}
                   >
                     <div>
@@ -172,7 +177,7 @@ export default function SearchBar({ className }: Props) {
                   <Button onClick={onTriggerSubmit} variant="link">
                     View all Results
                   </Button>
-                  <span className="text-xs">Press enter</span>
+                  <span className="text-xs" aria-hidden>Press enter</span>
                 </div>
               </PopoverContent>
             </Popover>
