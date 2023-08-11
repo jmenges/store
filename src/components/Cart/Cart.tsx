@@ -28,7 +28,6 @@ export default function Cart({ cart, cartIdUpdated, className }: Props) {
   useEffect(() => {
     if (!cartIdUpdated) return;
     document.cookie = `cartId=${cart.id};`;
-    console.log("cartId changed: ", cart.id);
   }, [cartIdUpdated, cart.id]);
 
   return (
