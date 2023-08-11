@@ -55,7 +55,7 @@ export default async function Collection({
   );
 
   return (
-    <main className="flex min-h-screen flex-col">
+    <>
       <Breadcrumbs
         title="Collections"
         items={[
@@ -64,14 +64,14 @@ export default async function Collection({
           { title: "Collections", href: "/collections" },
         ]}
       />
-      <div className="container mx-auto">
+      <main className="container mx-auto">
         <div className="my-8 lg:ml-8 max-sm:hidden">
           <CollectionItems
             activeHandle={collectionHandle}
             collections={collections}
           />
         </div>
-        <main className="relative mb-12 flex">
+        <div className="relative mb-12 flex">
           <div className="w-3/4 flex-1">
             <div className="flex flex-wrap gap-y-2 w-full items-center">
               <MobileProductFilter
@@ -109,8 +109,8 @@ export default async function Collection({
             productTypes={productTypes}
             className="max-md:hidden mt-12 top-0 sticky ml-8 h-fit w-1/4 pt-6"
           />
-        </main>
-      </div>
-    </main>
+        </div>
+      </main>
+    </>
   );
 }

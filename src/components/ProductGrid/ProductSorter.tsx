@@ -23,9 +23,9 @@ export default function ProductSorter({ className }: { className?: string }) {
 
   return (
     <div className={cn("flex items-center", className)}>
-      <p className="mr-2 flex-shrink-0 text-sm">Sort by</p>
-      <Select onValueChange={onValueChange} defaultValue={activeOption}>
-        <SelectTrigger className="tablet:text-h4 relative inline-flex min-w-[160px] bg-transparent">
+      <label className="mr-2 flex-shrink-0 text-sm" id="sort-products-label">Sort by</label>
+      <Select onValueChange={onValueChange} defaultValue={activeOption}> 
+        <SelectTrigger className="tablet:text-h4 relative inline-flex min-w-[160px] bg-transparent" aria-labelledby="sort-products-label">
           <SelectValue />
         </SelectTrigger>
         <SelectContent sideOffset={14}>

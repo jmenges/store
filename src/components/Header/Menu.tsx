@@ -7,7 +7,7 @@ type Props = { className?: string };
 
 export default function Menu({ className }: Props) {
   return (
-    <div className={cn("flex gap-4 items-center text-sm", className)}>
+    <nav className={cn("flex gap-4 items-center text-sm", className)}>
       <Link className="font-medium" href={"/products"}>
         Shop
       </Link>
@@ -24,6 +24,6 @@ export default function Menu({ className }: Props) {
       <Link className="font-medium" href="/collections">
         Collections
       </Link>
-    </div>
+    </nav>
   );
 }
