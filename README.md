@@ -22,12 +22,15 @@ Deployed at: [https://store-kappa-bice.vercel.app/](https://store-kappa-bice.ver
   * Searchbar with dynamic search results
   * Search page
 * Wishlist
+* Image optimizations
 
 ##### **Open Points**
 
 * Improve layout
 * Better animations (Page transitions, content loading)
 * Optimize image loading with blurred placeholders
+* Caching
+* Improve Accessibility
 
 ## Credits
 
