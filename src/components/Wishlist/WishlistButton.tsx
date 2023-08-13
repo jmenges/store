@@ -5,7 +5,12 @@ import useWishlist from "@/hooks/useWishlist";
 import { cn } from "@/lib/utils";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  LazyMotion,
+  domAnimation,
+  AnimatePresence,
+  m as motion,
+} from "framer-motion";
 import { useMemo } from "react";
 
 export const animation = {
@@ -44,35 +49,37 @@ export default function WishlistButton({ productId, className }: Props) {
 
   return (
     <>
-      <AnimatePresence>
-        {!isInWishlist(productId) ? (
-          <MotionButton
-            key="AddToWishlist"
-            {...animation}
-            onClick={(e) => {
-              addToWishlist(productId);
-            }}
-            className={cn("!bg-transparent", className)}
-            variant="icon"
-            size="raw"
-          >
-            <HeartIcon className="w-6 h-6 mr-1" />
-          </MotionButton>
-        ) : (
-          <MotionButton
-            key="RemoveFromWishlist"
-            {...animation}
-            onClick={() => {
-              removeFromWishlist(productId);
-            }}
-            className={cn("!bg-transparent", className)}
-            variant="icon"
-            size="raw"
-          >
-            <HeartSolidIcon className="w-6 h-6 mr-1 text-red-500" />
-          </MotionButton>
-        )}
-      </AnimatePresence>
+      <LazyMotion features={domAnimation}>
+        <AnimatePresence>
+          {!isInWishlist(productId) ? (
+            <MotionButton
+              key="AddToWishlist"
+              {...animation}
+              onClick={(e) => {
+                addToWishlist(productId);
+              }}
+              className={cn("!bg-transparent", className)}
+              variant="icon"
+              size="raw"
+            >
+              <HeartIcon className="w-6 h-6 mr-1" />
+            </MotionButton>
+          ) : (
+            <MotionButton
+              key="RemoveFromWishlist"
+              {...animation}
+              onClick={() => {
+                removeFromWishlist(productId);
+              }}
+              className={cn("!bg-transparent", className)}
+              variant="icon"
+              size="raw"
+            >
+              <HeartSolidIcon className="w-6 h-6 mr-1 text-red-500" />
+            </MotionButton>
+          )}
+        </AnimatePresence>
+      </LazyMotion>
     </>
   );
 }

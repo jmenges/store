@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { XMarkIcon } from '@heroicons/react/24/solid';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import React from 'react';
 
 type Props = { className?: string; children?: React.ReactNode; onRemoveClick: () => void };

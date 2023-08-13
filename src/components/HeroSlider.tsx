@@ -8,7 +8,7 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/solid";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { AnimatePresence, motion } from "framer-motion";
+import { LazyMotion, domAnimation, AnimatePresence, m as motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -257,8 +257,8 @@ export default function HeroSlider({ className }: Props) {
         onClick={() => prevSlide()}
       >
         <span className="sr-only">Last slide</span>
-        <ArrowLeftIcon className="h-5 w-5 sm:hidden" aria-hidden/>
-        <ArrowLongLeftIcon className="w-7 h-7 max-sm:hidden" aria-hidden/>
+        <ArrowLeftIcon className="h-5 w-5 sm:hidden" aria-hidden />
+        <ArrowLongLeftIcon className="w-7 h-7 max-sm:hidden" aria-hidden />
       </Button>
       <Button
         variant="outline"
@@ -266,16 +266,18 @@ export default function HeroSlider({ className }: Props) {
         onClick={() => nextSlide()}
       >
         <span className="sr-only">Next slide</span>
-        <ArrowRightIcon className="h-5 w-5 sm:hidden" aria-hidden/>
-        <ArrowLongRightIcon className="w-7 h-7 max-sm:hidden" aria-hidden/>
+        <ArrowRightIcon className="h-5 w-5 sm:hidden" aria-hidden />
+        <ArrowLongRightIcon className="w-7 h-7 max-sm:hidden" aria-hidden />
       </Button>
-      <AnimatePresence>
-        <Slide
-          className="px-8 sm:px-20"
-          key={slides[activeSlideIndex].id}
-          {...slides[activeSlideIndex]}
-        />
-      </AnimatePresence>
+      <LazyMotion features={domAnimation}>
+        <AnimatePresence>
+          <Slide
+            className="px-8 sm:px-20"
+            key={slides[activeSlideIndex].id}
+            {...slides[activeSlideIndex]}
+          />
+        </AnimatePresence>
+      </LazyMotion>
     </div>
   );
 }
