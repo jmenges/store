@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "analyze": "cross-env ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -44,9 +45,11 @@
   },
   "devDependencies": {
     "@iconify/json": "^2.2.95",
+    "@next/bundle-analyzer": "^13.4.13",
     "@svgr/core": "^8.0.0",
     "@svgr/plugin-jsx": "^8.0.1",
     "@types/lodash.debounce": "^4.0.7",
+    "sharp": "^0.32.4",
     "unplugin-icons": "^0.16.5"
   }
 }
