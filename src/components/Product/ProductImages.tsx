@@ -4,11 +4,12 @@ import DraggableScrollSection from "@/components/DraggableScrollSection";
 import { cn } from "@/lib/utils";
 import { Image as ImageType } from "@/types/shopify";
 import Image from "next/image";
-import React from "react";
+import React, { useMemo } from "react";
 
 import HeroIcon from "@/components/ui/HeroIcon";
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {
   images: ImageType[];
@@ -26,18 +27,29 @@ function ProductImages({ images, className }: Props) {
     setActiveIndex((prev) => (prev > 0 ? prev - 1 : 0));
   };
 
+  const MotionImage = useMemo(() => motion(Image), [Image]);
+
   return (
     <div className={cn("relative", className)}>
-      <div className="relative sm:ml-[25%] sm:w-3/4">
-        <Image
-          src={images[activeIndex].url}
-          width={images[activeIndex].width}
-          height={images[activeIndex].height}
-          sizes="(min-width: 1440px) 583px, (min-width: 780px) 41.56vw, (min-width: 640px) calc(75vw - 36px), calc(100vw - 48px)"
-          alt={images[activeIndex].altText}
-          className="object-contain"
-          priority
-        />
+      <div className="relative sm:ml-[25%] sm:w-3/4 overflow-clip">
+        <AnimatePresence  mode="popLayout">
+          <MotionImage
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.5 } }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.5 },
+            }}
+            key={`product-image-${activeIndex}`}
+            src={images[activeIndex].url}
+            width={images[activeIndex].width}
+            height={images[activeIndex].height}
+            sizes="(min-width: 1440px) 583px, (min-width: 780px) 41.56vw, (min-width: 640px) calc(75vw - 36px), calc(100vw - 48px)"
+            alt={images[activeIndex].altText}
+            className="object-contain"
+            priority
+          />
+        </AnimatePresence>
         <Button
           className="absolute left-2 top-1/2"
           variant="outline"
