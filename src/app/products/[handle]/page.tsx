@@ -1,8 +1,9 @@
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { headers } from "next/headers";
+
+import { getPlaiceholder } from "plaiceholder";
 
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AddToCartButton from "@/components/Cart/AddToCartButton";
@@ -15,9 +16,10 @@ import WishlistButton from "@/components/Wishlist/WishlistButton";
 import {
   getProduct,
   getProductRecommendations,
+  getProducts,
 } from "@/lib/shopify/operations/product";
 import { SearchParams } from "@/types";
-import { ProductVariant } from "@/types/shopify";
+import { Image, ProductVariant } from "@/types/shopify";
 import { ProductOption } from "@shopify/hydrogen-react/storefront-api-types";
 
 type ValidSearchParams = {
@@ -29,12 +31,46 @@ type Props = {
   searchParams: SearchParams;
 };
 
+export const dynamicParams = false;
+
+export const generateStaticParams = async () => {
+  const products = await getProducts({});
+
+  return products.map((product) => ({
+    handle: product.handle,
+  }));
+};
+
+const generateBlurForImages = async (images: Image[]): Promise<Image[]> => {
+  const imagesBase64Data = images.map((image) =>
+    fetch(`${image.url}&width=20`, { next: { revalidate: 3600 }})
+      .then(async (res) => Buffer.from(await res.arrayBuffer()))
+      .then(async (buffer) => {
+        const { base64 } = await getPlaiceholder(buffer, { size: 10 });
+        return base64;
+      })
+  );
+
+  const imagesBase64 = await Promise.all(imagesBase64Data);
+  return images.map((image, index) => ({
+    ...image,
+    blurDataURL: imagesBase64[index],
+  }));
+};
+
 export default async function Product({
   params: { handle },
   searchParams,
 }: Props) {
   const product = await getProduct(handle);
-  if (!product) return notFound();
+
+  // this should never be called based on generateStaticParams and dynamicParams = false
+  if (!product) throw new Error("Product not found.");
+
+  const start = Date.now();
+  product.images = await generateBlurForImages(product.images);
+  const end = Date.now();
+  console.log(`Execution time: ${end - start} ms`);
 
   const productRecommendations = await getProductRecommendations(product.id);
 

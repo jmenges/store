@@ -33,6 +33,7 @@ export type Image = Pick<ShopifyImage, "id"> & {
   altText: string;
   width: number;
   height: number;
+  blurDataURL?: string;
 };
 
 export type ShopifyProduct = Pick<
