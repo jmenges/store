@@ -2,6 +2,9 @@ Portfilio Project - Headless Ecommerce Store with Shopify
 
 Deployed at: [https://store-kappa-bice.vercel.app/](https://store-kappa-bice.vercel.app/)
 
+
+This branch contains the Searchbar implementation for the Searchbar. As of today a route which contains some server action can not be statically generated. The Searchbar is part of the header which causes all routes to be generated dynamically.
+
 ##### **Details**
 
 * NextJs 13.4 with App directory
