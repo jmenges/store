@@ -33,13 +33,13 @@ type Props = {
 
 // export const dynamicParams = "force-dynamic"
 
-// export const generateStaticParams = async () => {
-//   const products = await getProducts({});
+export const generateStaticParams = async () => {
+  const products = await getProducts({});
 
-//   return products.map((product) => ({
-//     handle: product.handle,
-//   }));
-// };
+  return products.map((product) => ({
+    handle: product.handle,
+  }));
+};
 
 const generateBlurForImages = async (images: Image[]): Promise<Image[]> => {
   const imagesBase64Data = images.map((image) =>
