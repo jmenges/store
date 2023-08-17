@@ -37,7 +37,7 @@ function findError<T extends object>(error: T): boolean {
 }
 
 export async function shopifyFetch<T>({
-  cache = "no-cache",
+  cache = "force-cache",
   headers,
   query,
   tags,

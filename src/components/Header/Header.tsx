@@ -16,7 +16,7 @@ export default function Header({}: Props) {
 
         <div className="flex-1 flex gap-2 justify-end">
           <WishlistLink />
-          <CartLoader className="" />
+          {/* <CartLoader className="" /> */}
         </div>
       </div>
     </header>
