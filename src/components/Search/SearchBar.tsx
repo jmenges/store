@@ -1,6 +1,5 @@
 "use client";
 
-import { getSearchResultsServer } from "@/components/Search/actions";
 import {
   SearchOverlay,
   SearchOverlayContent,
@@ -21,14 +20,14 @@ import { useMemo, useRef, useState, useTransition } from "react";
 
 import Image from "next/image";
 
+import HeroIcon from "@/components/ui/HeroIcon";
 import { cn } from "@/lib/utils";
 import debounce from "lodash.debounce";
-import HeroIcon from "@/components/ui/HeroIcon";
 
 type Props = { className?: string };
 
-import { validator } from "@exodus/schemasafe";
 import { ProductSchema } from "@/validation/product";
+import { validator } from "@exodus/schemasafe";
 const validate = validator(ProductSchema);
 
 export default function SearchBar({ className }: Props) {
