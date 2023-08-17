@@ -26,9 +26,9 @@ import debounce from "lodash.debounce";
 
 type Props = { className?: string };
 
-import { ProductSchema } from "@/validation/product";
-import { validator } from "@exodus/schemasafe";
-const validate = validator(ProductSchema);
+// import { ProductSchema } from "@/validation/product";
+// import { validator } from "@exodus/schemasafe";
+// const validate = validator(ProductSchema);
 
 export default function SearchBar({ className }: Props) {
   /* State & Refs */
@@ -92,11 +92,11 @@ export default function SearchBar({ className }: Props) {
           ).then((resp) => resp.json())) as { products: Product[] | undefined };
 
           if (data.products !== undefined) {
-            data.products.forEach((product) => {
-              if (!validate(product)) {
-                throw new Error("Invalid api response");
-              }
-            });
+          //   data.products.forEach((product) => {
+          //     if (!validate(product)) {
+          //       throw new Error("Invalid api response");
+          //     }
+          //   });
             products = data.products;
           }
         } catch (error) {
