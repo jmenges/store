@@ -27,10 +27,6 @@ import HeroIcon from "@/components/ui/HeroIcon";
 
 type Props = { className?: string };
 
-import { validator } from "@exodus/schemasafe";
-import { ProductSchema } from "@/validation/product";
-const validate = validator(ProductSchema);
-
 export default function SearchBar({ className }: Props) {
   /* State & Refs */
   const [isSearchBarVisible, setIsSearchBarVisible] = useState<boolean>(false);
@@ -80,31 +76,9 @@ export default function SearchBar({ className }: Props) {
     startTransition(async () => {
       const inputValue = inputRef.current?.value;
       let products: Product[] = [];
-
       if (inputValue) {
-        try {
-          const data = (await fetch(
-            `/api/search?term=${encodeURIComponent(inputValue)}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          ).then((resp) => resp.json())) as { products: Product[] | undefined };
-
-          if (data.products !== undefined) {
-            data.products.forEach((product) => {
-              if (!validate(product)) {
-                throw new Error("Invalid api response");
-              }
-            });
-            products = data.products;
-          }
-        } catch (error) {
-          console.log(error);
-        }
+        products = await getSearchResultsServer(inputValue);
       }
-
       setSearchResults(products);
       setIsSearchLoading(false);
     });
@@ -135,7 +109,7 @@ export default function SearchBar({ className }: Props) {
         <HeroIcon ariaAlt="Search">
           <MagnifyingGlassIcon className="w-4 h-4" />
         </HeroIcon>
-      </SearchOverlayTrigger>
+       </SearchOverlayTrigger>
       <SearchOverlayContent
         onOpenAutoFocus={(e) => {
           e.preventDefault();
@@ -147,9 +121,7 @@ export default function SearchBar({ className }: Props) {
         <div className="flex flex-1 relative">
           <form action="/search" className="w-full" ref={formRef}>
             <div className="relative">
-              <label htmlFor="search" className="sr-only">
-                Search:{" "}
-              </label>
+              <label htmlFor="search" className="sr-only">Search: </label>
               <Input
                 autoFocus={false}
                 name="term"
@@ -205,9 +177,7 @@ export default function SearchBar({ className }: Props) {
                   <Button onClick={onTriggerSubmit} variant="link">
                     View all Results
                   </Button>
-                  <span className="text-xs" aria-hidden>
-                    Press enter
-                  </span>
+                  <span className="text-xs" aria-hidden>Press enter</span>
                 </div>
               </PopoverContent>
             </Popover>

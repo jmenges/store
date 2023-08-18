@@ -8,7 +8,7 @@ import {
   getProductsByIdsQuery,
   getProductsQuery,
 } from "@/lib/shopify/queries/product";
-import { removeEdgesAndNodes, reshapeImage, reshapeImages } from "@/lib/shopify/utils";
+import { removeEdgesAndNodes, reshapeImages } from "@/lib/shopify/utils";
 import {
   GetProductNodesOperation,
   GetProductOperation,
@@ -39,11 +39,10 @@ const reshapeProduct = (
     return undefined;
   }
 
-  const { images, variants, featuredImage,  ...rest } = product;
+  const { images, variants, ...rest } = product;
 
   return {
     ...rest,
-    featuredImage: featuredImage ? reshapeImage(featuredImage, ""): undefined,
     images: reshapeImages(images, product.title),
     variants: removeEdgesAndNodes(variants),
   };
