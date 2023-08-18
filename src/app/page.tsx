@@ -14,10 +14,15 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 export default async function Home() {
-  const collections = await getCollections({ first: 3 });
-  const bestSellingProducts = await getProducts({
+  const collectionsData = getCollections({ first: 3 });
+  const bestSellingProductsData = getProducts({
     sortKey: "BEST_SELLING",
   });
+
+  const [collections, bestSellingProducts] = await Promise.all([
+    collectionsData,
+    bestSellingProductsData,
+  ]);
 
   return (
     <main className="relative -mt-[68px] flex flex-col items-center justify-between">
@@ -185,7 +190,9 @@ export default async function Home() {
             Get 15% off on your first purchase
           </p>
           <form className="flex" action="/not-implemented">
-            <label htmlFor="newsletter-landing" className="sr-only">Email address</label>
+            <label htmlFor="newsletter-landing" className="sr-only">
+              Email address
+            </label>
             <Input
               id="newsletter-landing"
               className="border-black z-10 max-w-sm ring-offset-[#f0f1f3]"
